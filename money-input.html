@@ -1,0 +1,29 @@
+
+<style include="app-shared-styles">
+
+  :host {
+    display: block;
+  }
+
+  .prefix {
+    margin-right: 8px;
+  }
+
+  paper-input[focused] .prefix {
+  	color: var(--app-primary-color);
+  }
+
+</style>
+
+
+<paper-input class="shared-paper-input"
+             allowed-pattern="[0-9\.\,\-]"
+             disabled="[[disabled]]"
+             label="[[label]]"
+             type="tel"
+             placeholder="[[placeholder]]"
+             value="[[_formattedValue]]"
+             on-value-changed="__inputValueChanged">
+  <div slot="prefix" class="prefix">[[currency]]</div>
+  <div slot="suffix" class="suffix">[[suffix]]</div>
+</paper-input>
