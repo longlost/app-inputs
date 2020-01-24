@@ -3,7 +3,7 @@
   * `app-textarea`
   * 
   *   Custom styled paper-textarea element that allows an iron image prefix icon
-  * 	just like paper-input's.
+  *   just like paper-input's.
   *
   *
   *
@@ -24,8 +24,8 @@
 
 
 import {AppElement, html} from '@longlost/app-element/app-element.js';
-import {consumeEvent} 		from '@longlost/utils/utils.js';
-import htmlString 				from './app-textarea.html';
+import {consumeEvent}     from '@longlost/utils/utils.js';
+import htmlString         from './app-textarea.html';
 import '@longlost/app-shared-styles/app-shared-styles.js';
 import '@polymer/iron-icon/iron-icon.js';
 import '@polymer/paper-input/paper-textarea.js';
@@ -43,33 +43,33 @@ class AppTextarea extends AppElement {
   static get properties() {
     return {
 
-    	icon: {
-    		type: String,
-    		value: 'input-icons:subject'
-    	},
+      focused: Boolean,
 
-    	label: {
-    		type: String,
-    		value: 'Notes'
-    	},
+      icon: {
+        type: String,
+        value: 'input-icons:subject'
+      },
+
+      label: {
+        type: String,
+        value: 'Notes'
+      },
       
       value: String,
-
-      _focused: Boolean
 
     };
   }
 
 
   __focusedChanged(event) {
-  	this._focused = event.detail.value;
+    this.focused = event.detail.value;
   }
 
 
   __valueChanged(event) {
-  	consumeEvent(event);
+    consumeEvent(event);
 
-  	this.fire('value-changed', {value: event.detail.value.trim()});
+    this.fire('value-changed', {value: event.detail.value.trim()});
   }
 
 }

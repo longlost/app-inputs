@@ -1,29 +1,29 @@
 
 /**
-	*
- 	* `money-input`
- 	*
- 	*
- 	* 	Formats user input into currency.
- 	*
- 	*
- 	* 	@customElement
- 	* 	@polymer
- 	* 	@demo demo/index.html
- 	*
- 	*
- 	**/
+  *
+  * `money-input`
+  *
+  *
+  *   Formats user input into currency.
+  *
+  *
+  *   @customElement
+  *   @polymer
+  *   @demo demo/index.html
+  *
+  *
+  **/
 
 import {AppElement, html} from '@longlost/app-element/app-element.js';
-import {consumeEvent} 		from '@longlost/utils/utils.js';
-import htmlString 				from './money-input.html';
+import {consumeEvent}     from '@longlost/utils/utils.js';
+import htmlString         from './money-input.html';
 import '@longlost/app-shared-styles/app-shared-styles.js';
 import '@polymer/paper-input/paper-input.js';
 
 
 // Removes commas and decimal.
 const removeUI = str => {
-	return ('' + str).replace(/[^\d]*/g, '');
+  return ('' + str).replace(/[^\d]*/g, '');
 };
 
 
@@ -55,6 +55,8 @@ class MoneyInput extends AppElement {
         value: false
       },
 
+      focused: Boolean,
+
       // Input label.
       label: {
         type: String,
@@ -78,7 +80,7 @@ class MoneyInput extends AppElement {
 
       // Presets field value notifies new values.
       value: Number,
-    	
+      
       _formattedValue: {
         type: String,
         computed: '__computeFormattedValue(value)'
@@ -89,9 +91,9 @@ class MoneyInput extends AppElement {
 
 
   static get observers() {
-  	return [
-  		'__formattedValueChanged(_formattedValue)'
-  	];
+    return [
+      '__formattedValueChanged(_formattedValue)'
+    ];
   }
 
   // Add commas.
@@ -134,7 +136,12 @@ class MoneyInput extends AppElement {
 
 
   __formattedValueChanged(value) {
-  	this.fire('value-changed', {value});
+    this.fire('value-changed', {value});
+  }
+
+
+  __focusedChanged(event) {
+    this.focused = event.detail.value;
   }
 
 
@@ -147,7 +154,7 @@ class MoneyInput extends AppElement {
       this.value = removeUI(this.value);
     }
     else {
-    	this.value = value;
+      this.value = value;
     }
   }
   

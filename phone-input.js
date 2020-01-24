@@ -1,24 +1,24 @@
 
 /**
-	*
+  *
   * `phone-input`
   *
   *
-  * 	Custom phone-input with a prefix icon.
+  *   Custom phone-input with a prefix icon.
   *
   *
   *
-  * 	@customElement
-  * 	@polymer
-  * 	@demo demo/index.html
+  *   @customElement
+  *   @polymer
+  *   @demo demo/index.html
   *
   *
   **/
 
 
 import {AppElement, html} from '@longlost/app-element/app-element.js';
-import {consumeEvent} 		from '@longlost/utils/utils.js';
-import htmlString 				from './phone-input.html';
+import {consumeEvent}     from '@longlost/utils/utils.js';
+import htmlString         from './phone-input.html';
 import '@longlost/app-icons/app-icons.js';
 import '@polymer/iron-icon/iron-icon.js';
 import '@polymer/gold-phone-input/gold-phone-input.js';
@@ -35,25 +35,25 @@ class PhoneInput extends AppElement {
   static get properties() {
     return {
 
-    	placeholder: String,
+      focused: Boolean,
 
-    	value: String,
+      placeholder: String,
 
-    	_focused: Boolean
+      value: String
 
     };
   }
 
 
   __focusedChanged(event) {
-  	this._focused = event.detail.value;
+    this.focused = event.detail.value;
   }
 
 
   __valueChanged(event) {
-  	consumeEvent(event);
+    consumeEvent(event);
 
-  	this.fire('value-changed', {value: event.detail.value.trim()});
+    this.fire('value-changed', {value: event.detail.value.trim()});
   }
   
 }
