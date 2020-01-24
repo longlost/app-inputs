@@ -10,7 +10,7 @@
   }
 
   paper-input[focused] .prefix {
-  	color: var(--app-primary-color);
+    color: var(--app-primary-color);
   }
 
 </style>
@@ -23,6 +23,7 @@
              type="tel"
              placeholder="[[placeholder]]"
              value="[[_formattedValue]]"
+             on-focused-changed="__focusedChanged"
              on-value-changed="__inputValueChanged">
   <div slot="prefix" class="prefix">[[currency]]</div>
   <div slot="suffix" class="suffix">[[suffix]]</div>

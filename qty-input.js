@@ -1,23 +1,24 @@
 
 /**
-	*
+  *
   * `qty-input`
   *
   *
-  * 	Custom quantity input with increment/decrement icon buttons.
+  *   Custom quantity input with increment/decrement icon buttons.
   *
   *
   *
-  * 	@customElement
-  * 	@polymer
-  * 	@demo demo/index.html
+  *   @customElement
+  *   @polymer
+  *   @demo demo/index.html
   *
   *
   **/
 
 import {AppElement, html} from '@longlost/app-element/app-element.js';
-import {clamp}    				from '@longlost/lambda/lambda.js';
-import htmlString 				from './qty-input.html';
+import {clamp}            from '@longlost/lambda/lambda.js';
+import {consumeEvent}     from '@longlost/utils/utils.js';
+import htmlString         from './qty-input.html';
 import '@longlost/app-icons/app-icons.js';
 import '@polymer/paper-input/paper-input.js';
 import '@polymer/paper-icon-button/paper-icon-button.js';
@@ -33,6 +34,8 @@ class QtyInput extends AppElement {
 
   static get properties() {
     return {
+
+      focused: Boolean,
 
       increment: {
         type: Number,
@@ -86,16 +89,16 @@ class QtyInput extends AppElement {
  
   // Based on placement prop.
   __computeWrapperClass(placement) {
-    if (placement === 'top') 		{ return 'buttons-top-and-bottom'; }
+    if (placement === 'top')    { return 'buttons-top-and-bottom'; }
     if (placement === 'center') { return 'buttons-left-and-right'; }
-    if (placement === 'right') 	{ return 'buttons-right'; }
+    if (placement === 'right')  { return 'buttons-right'; }
   }
 
   
   __computeIconClass(placement) {
 
     if (placement === 'center') { 
-    	return 'icon-margin-for-left-and-right'; 
+      return 'icon-margin-for-left-and-right'; 
     }
 
     return 'icon-margin-for-center';
@@ -114,12 +117,14 @@ class QtyInput extends AppElement {
   }
 
 
-  __quantityChanged(quantity) {
-    this.fire('qty-input-changed', {value: quantity});
+  __quantityChanged(qty) {
+    this.fire('value-changed', {value: qty});
   }
  
 
   __qtyInputChanged(event) {
+    consumeEvent(event);
+
     const {value} = event.detail;
 
     if (value === undefined) { return; }
@@ -128,8 +133,10 @@ class QtyInput extends AppElement {
   }
 
 
-  async __focusChanged(event) {
+  __focusedChanged(event) {
     const {value} = event.detail;
+
+    this.focused = value;
 
     if (value) {
       this.qty = undefined;
@@ -141,7 +148,7 @@ class QtyInput extends AppElement {
     }
 
     const rounded = Math.round(this.qty / this.roundTo) * this.roundTo;
-    this.qty 			= clamp(this.min, this.max, rounded);
+    this.qty      = clamp(this.min, this.max, rounded);
   }
 
   
@@ -175,7 +182,7 @@ class QtyInput extends AppElement {
       }
 
       const rounded = Math.round(temp / this.roundTo) * this.roundTo;
-      this.qty 			= clamp(this.min, this.max, rounded);
+      this.qty      = clamp(this.min, this.max, rounded);
     }
     catch (error) {
       if (error === 'click debounced') { return; }
