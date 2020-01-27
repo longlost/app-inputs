@@ -1,0 +1,63 @@
+
+<style include="app-shared-styles">
+
+  :host {
+    display: flex;
+    --prefix-icon-color: 				 currentColor;
+    --prefix-icon-focused-color: var(--app-primary-color);;
+  }
+
+  iron-icon {
+    min-height: 24px;
+    min-width:  24px;
+    margin:     28px 4px 0px 0px;
+    color: 			var(--prefix-icon-color);
+  }
+
+  iron-icon[focused] {
+    color: var(--prefix-icon-focused-color);
+  }
+
+  ::slotted(*) {
+    width: calc(100% - 28px);
+    --paper-input-container: {
+      position: relative;
+    };
+    /*
+      Must set this here to counteract a bug 
+      in paper-input and paper-textarea.
+
+      This value is also set in metadata-editor
+      to apply the fix.
+
+      When this is only set on this paper-textarea, 
+      it interferes with the styles 
+      of metadata-editor's paper-inputs.
+
+      This is why this is separate custom element.
+    */
+    --paper-input-container-label-floating: {
+      left: -28px;
+    };
+    --paper-input-container-underline: {
+      position: absolute;
+      bottom:   6px;
+      left:    -28px;
+      right:    0px;
+    };
+    --paper-input-container-underline-focus: {
+      position: absolute;
+      bottom:   6px;
+      left:    -28px;
+      right:    0px;
+    };
+  }
+
+</style>
+
+
+<iron-icon focused$="[[focused]]" 
+           icon="[[icon]]">
+</iron-icon>
+
+<slot></slot>

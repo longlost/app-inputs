@@ -1,6 +1,6 @@
 
 /**
-  * `app-textarea`
+  * `app-dropdown`
   * 
   *   Custom styled paper-textarea element that allows an iron image prefix icon
   *   just like paper-input's.
@@ -10,10 +10,7 @@
   *  Properites:
   *
   *  
-  *     icon - <String> <iron-icon> 'icon' prop.
-  *
-  *     label - <String> <paper-textarea> 'label' prop.
-  *
+  *    notes - <String> required: File item notes string value.
   *
   *
   * @implements AppInputMixin
@@ -25,16 +22,17 @@
   **/
 
 
-import {html}          from '@longlost/app-element/app-element.js';
+import {html} 				 from '@longlost/app-element/app-element.js';
 import {AppInputMixin} from './app-input-mixin.js';
-import htmlString      from './app-textarea.html';
-import '@polymer/paper-input/paper-textarea.js';
+import htmlString 		 from './app-dropdown.html';
+import '@longlost/app-icons/app-icons.js';
+import '@polymer/paper-dropdown-menu/paper-dropdown-menu.js';
+import '@polymer/paper-listbox/paper-listbox.js';
 import './icon-prefix-input.js';
-import './input-icons.js';
 
 
-class AppTextarea extends AppInputMixin() {
-  static get is() { return 'app-textarea'; }
+class AppDropdown extends AppInputMixin() {
+  static get is() { return 'app-dropdown'; }
 
   static get template() {
     return html([htmlString]);
@@ -46,12 +44,12 @@ class AppTextarea extends AppInputMixin() {
 
       icon: {
         type: String,
-        value: 'input-icons:subject'
+        value: 'app-icons:menu'
       },
 
       label: {
         type: String,
-        value: 'Notes'
+        value: 'Menu'
       }
 
     };
@@ -59,4 +57,4 @@ class AppTextarea extends AppInputMixin() {
 
 }
 
-window.customElements.define(AppTextarea.is, AppTextarea);
+window.customElements.define(AppDropdown.is, AppDropdown);

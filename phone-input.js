@@ -8,6 +8,8 @@
   *
   *
   *
+  *   @implements AppInputMixin
+  *
   *   @customElement
   *   @polymer
   *   @demo demo/index.html
@@ -16,15 +18,15 @@
   **/
 
 
-import {AppElement, html} from '@longlost/app-element/app-element.js';
-import {consumeEvent}     from '@longlost/utils/utils.js';
-import htmlString         from './phone-input.html';
+import {html}          from '@longlost/app-element/app-element.js';
+import {AppInputMixin} from './app-input-mixin.js';
+import htmlString      from './phone-input.html';
 import '@longlost/app-icons/app-icons.js';
-import '@polymer/iron-icon/iron-icon.js';
 import '@polymer/gold-phone-input/gold-phone-input.js';
+import './icon-prefix-input.js';
 
 
-class PhoneInput extends AppElement {
+class PhoneInput extends AppInputMixin() {
   static get is() { return 'phone-input'; }
 
   static get template() {
@@ -35,25 +37,19 @@ class PhoneInput extends AppElement {
   static get properties() {
     return {
 
-      focused: Boolean,
+      icon: {
+        type: String,
+        value: 'app-icons:call'
+      },
 
-      placeholder: String,
+      label: {
+        type: String,
+        value: 'Phone Number'
+      },
 
-      value: String
+      placeholder: String
 
     };
-  }
-
-
-  __focusedChanged(event) {
-    this.focused = event.detail.value;
-  }
-
-
-  __valueChanged(event) {
-    consumeEvent(event);
-
-    this.fire('value-changed', {value: event.detail.value.trim()});
   }
   
 }
