@@ -1,0 +1,28 @@
+
+<style include="app-shared-styles">
+
+  :host {
+    display: block;
+    --app-dropdown-menu-background-color: var(--app-body-color);
+  }
+
+  .shared-paper-listbox {
+  	--paper-listbox-background-color: var(--app-dropdown-menu-background-color);
+  }
+
+</style>
+
+
+<icon-prefix-input focused="[[focused]]" 
+									 icon="[[icon]]">
+	<paper-dropdown-menu class="shared-paper-dropdown-menu"
+											 label="[[label]]"
+	                		 value="[[value]]"
+	                		 on-focused-changed="__focusedChanged"
+	                		 on-value-changed="__valueChanged">
+	  <paper-listbox class="shared-paper-listbox"
+	  							 slot="dropdown-content">
+	    <slot></slot>
+	  </paper-listbox>
+	</paper-dropdown-menu>
+</icon-prefix-input>
