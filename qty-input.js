@@ -117,8 +117,8 @@ class QtyInput extends AppElement {
   }
 
 
-  __quantityChanged(qty) {
-    this.fire('value-changed', {value: qty});
+  __quantityChanged(value) {
+    this.fire('value-changed', {value});
   }
  
 
