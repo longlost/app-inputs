@@ -69,7 +69,7 @@ class AppTextarea extends AppElement {
   __valueChanged(event) {
     consumeEvent(event);
 
-    this.fire('value-changed', {value: event.detail.value.trim()});
+    this.fire('value-changed', event.detail);
   }
 
 }

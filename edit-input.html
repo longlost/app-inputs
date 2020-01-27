@@ -1,0 +1,90 @@
+
+<style>
+
+  :host {
+    display:     flex;
+    align-items: center;
+    position:    relative;
+    padding:     var(--input-padding, 0px 16px);
+    color:       var(--secondary-text-color);
+  }
+
+  icon-to-spinner {
+    margin-right: 16px;
+  }
+
+  #inputSlot::slotted(*) {
+    display:      inline-block;
+    width:        100%;
+    margin-right: 40px;
+    --paper-input-container-color:       var(--secondary-text-color);
+    --paper-input-container-input-color: var(--dark-text-color);
+    --paper-input-container-focus-color: var(--app-primary-color);
+    --paper-input-container-underline: {
+      display: none;
+    };
+    --paper-input-container-underline-focus: { /* broken paper-input fix (3.0.0-pre.1) */
+      transition: transform 0.25s ease-in-out;
+    };
+  }
+
+  #btn-faded-background {
+    position:     absolute;
+    right:        8px;
+    padding-left: 40px;
+    background:   linear-gradient(
+    	to right, 
+    	var(--text-truncate-fade), 
+    	var(--app-background-color) 40%
+    );
+  }
+
+  paper-button {
+    @apply --custom-icon-paper-button-mixin;
+  }
+
+  .edit-icon {
+    pointer-events:    none;
+    transform:         scale(0, 0);
+    transition:        transform 0.2s ease-in, opacity 0.2s ease-in;
+    --icon-fill-color: var(--secondary-text-color);
+  }
+
+  .focused {
+    color: var(--app-primary-color);
+  }
+
+  .invalid {
+    color: var(--app-error-color);
+  }
+
+  .disabled {
+    opacity: 0.33;
+  }
+
+  .edit-icon-entry {
+    pointer-events: auto;
+    transform:      scale(1, 1);
+  }
+
+</style>
+
+
+<icon-to-spinner id="inputIcon" 
+                 class$="[[__computeColor(disabled, _invalid, _focused)]]" 
+                 icon="[[icon]]">
+</icon-to-spinner> 
+
+<slot id="inputSlot"></slot>
+
+<div id="btn-faded-background">
+  <paper-button noink="[[!_noPaperRipple]]" 
+                on-click="__editButtonClicked">
+    <pencil-to-check-icon id="editIcon" 
+                          class$="edit-icon [[__computeEditIconEntry(disabled)]] [[__computeColor(disabled, _invalid, _focused)]]">
+    </pencil-to-check-icon>
+  </paper-button>
+</div>
+
+<paper-ripple noink="[[_noPaperRipple]]"></paper-ripple>
+    

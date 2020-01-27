@@ -1,0 +1,109 @@
+
+<style>
+  
+  edit-input[hidden] {
+    display: none;
+  }
+
+</style>
+
+
+<edit-input disabled="[[disabled]]"
+            hidden="[[hideNameInput]]"
+            icon="label-outline"
+            kind="fullName">
+  <paper-input allowed-pattern="[^/\f/\n/\r/\t/\v]"
+               autocapitalize
+               auto-validate
+               disabled="[[disabled]]"
+               label="Full Name"
+               placeholder="[[__computeFullNamePlaceholder(data.fullName)]]"
+               tabindex="0">
+  </paper-input>
+</edit-input>
+
+<edit-input disabled="[[disabled]]"
+            icon="home"
+            kind="address1">
+  <paper-input allowed-pattern="[^/\f/\n/\r/\t/\v]"
+               autocapitalize
+               autocomplete
+               autocorrect
+               auto-validate
+               disabled="[[disabled]]"
+               label="Address Line 1"
+               placeholder="[[__computeAddress1Placeholder(data.address1)]]"
+               tabindex="0">
+  </paper-input>
+</edit-input>
+
+<edit-input disabled="[[disabled]]"
+            icon="store"
+            kind="address2">
+  <paper-input allowed-pattern="[^/\f/\n/\r/\t/\v]"
+               autocapitalize
+               autocomplete
+               autocorrect
+               auto-validate
+               disabled="[[disabled]]"
+               label="Address Line 2 (if applicable)"
+               placeholder="[[__computeAddress2Placeholder(data.address2)]]"
+               tabindex="0">
+  </paper-input>
+</edit-input>
+
+<edit-input disabled="[[disabled]]"
+            icon="location-city"
+            kind="city">
+  <paper-input allowed-pattern="[^/\f/\n/\r/\t/\v]"
+               autocapitalize
+               autocomplete
+               autocorrect
+               auto-validate
+               disabled="[[disabled]]"
+               label="City"
+               placeholder="[[__computeCityPlaceholder(data.city)]]"
+               tabindex="0">
+  </paper-input>
+</edit-input>
+
+<edit-input disabled="[[disabled]]"
+            icon="terrain"
+            kind="state">
+  <paper-input allowed-pattern="[a-zA-Z^/\f/\n/\r/\t/\v]"
+               auto-validate
+               char-counter
+               disabled="[[disabled]]"
+               label="State/Province/Region abbreviation"
+               maxlength="2"
+               placeholder="[[__computeStatePlaceholder(data.state)]]"
+               tabindex="0">
+  </paper-input>
+</edit-input>
+
+<edit-input disabled="[[disabled]]"
+            icon="my-location"
+            kind="zip">
+  <paper-input allowed-pattern="[^/\s/\f/\n/\r/\t/\v]"
+               auto-validate
+               char-counter
+               disabled="[[disabled]]"
+               label="ZIP/Postal Code"
+               placeholder="[[__computeZipPlaceholder(data.zip)]]"
+               tabindex="0">
+  </paper-input>
+</edit-input>
+
+<edit-input disabled="[[disabled]]"
+            icon="public"
+            kind="country">
+  <paper-input allowed-pattern="[a-zA-Z^/\f/\n/\r/\t/\v]"
+               auto-validate
+               char-counter
+               disabled="[[disabled]]"
+               label="Country abbreviation"
+               maxlength="2"
+               placeholder="[[__computeCountryPlaceholder(data.country)]]"
+               tabindex="0">
+  </paper-input>
+</edit-input>
