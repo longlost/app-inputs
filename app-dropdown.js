@@ -10,10 +10,10 @@
   *  Properites:
   *
   *  
-  *    notes - <String> required: File item notes string value.
+  *    icon - <String> <iron-icon> 'icon' property binding.
   *
   *
-  * @implements AppInputMixin
+  * @implements InputMixin
   *
   * @customElement
   * @polymer
@@ -22,16 +22,16 @@
   **/
 
 
-import {html} 				 from '@longlost/app-element/app-element.js';
-import {AppInputMixin} from './app-input-mixin.js';
-import htmlString 		 from './app-dropdown.html';
+import {html}       from '@longlost/app-element/app-element.js';
+import {InputMixin} from './input-mixin.js';
+import htmlString   from './app-dropdown.html';
 import '@longlost/app-icons/app-icons.js';
 import '@polymer/paper-dropdown-menu/paper-dropdown-menu.js';
 import '@polymer/paper-listbox/paper-listbox.js';
 import './icon-prefix-input.js';
 
 
-class AppDropdown extends AppInputMixin() {
+class AppDropdown extends InputMixin() {
   static get is() { return 'app-dropdown'; }
 
   static get template() {
@@ -47,6 +47,7 @@ class AppDropdown extends AppInputMixin() {
         value: 'app-icons:menu'
       },
 
+      // Overwrite mixin prop.
       label: {
         type: String,
         value: 'Menu'

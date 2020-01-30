@@ -1,0 +1,33 @@
+
+<style include="app-shared-styles">
+
+  :host {
+    display:  block;
+    position: relative;
+  }
+
+  #list {
+    --suggestion-list-background-color: var(--app-body-color);
+  }
+
+</style>
+
+
+<paper-input class="shared-paper-input"
+             autocomplete="[[autocomplete]]"
+             autocorrect="[[autocorrect]]"
+             autocapitalize="[[autocapitalize]]"
+             label="[[label]]"
+             placeholder="[[placeholder]]"
+             tabindex="0"
+             type="[[type]]"
+             value="[[value]]"
+             on-focused-changed="__focusedChanged"
+             on-value-changed="__valueChanged">
+</paper-input>
+
+
+<suggestion-list id="list" 
+                 suggestions="[[suggestions]]"
+                 on-suggestion-selected="__suggestionSelected">                       
+</suggestion-list>
