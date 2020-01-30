@@ -1,0 +1,117 @@
+
+<style>
+
+  :host {
+    display:           flex;
+    align-items:       center;
+    justify-content:   center;
+    position:  				 relative;
+    height:            64px;
+    padding:           0px 16px;
+    background-color:  var(--app-primary-color); 
+    --input-flex-grow: 1;
+  }
+
+  #input-wrapper {
+    flex-grow:      var(--input-flex-grow);
+    max-width:      296px;
+    position:       relative;
+    pointer-events: none;
+  }
+ 
+  paper-input {
+    @apply --single-line-truncate-mixin;
+    padding:          0px 8px;
+    border-radius:    8px;
+    height:           40px;
+    display:          flex;
+    align-items:      center;
+    pointer-events:   auto;    
+    font-size:        16px;
+    background-color: var(--app-background-color);
+    --paper-input-container-color:       var(--app-accent-color);
+    --paper-input-container-input-color: var(--dark-text-color);
+    --paper-input-container-focus-color: transparent;
+    --paper-input-container-underline: { 
+      display: none;
+    };
+    --paper-input-container: { 
+      display:     flex;
+      align-items: center;
+      width:       calc(100% - 40px); /* minus the 'X' button */
+      padding:     8px;
+    };
+    --paper-input-container-shared-input-style: {
+      width:         100%;
+      white-space:   nowrap;
+      text-overflow: ellipsis;
+    };
+    --paper-input-container-label: {
+      position:  absolute;
+      top:       0px;
+      font-size: 16px;
+    };
+  }
+
+  iron-icon {
+    color: var(--app-primary-color);
+  }
+
+  .hide-search-clear-btn {
+    opacity: 0;
+  }
+
+  #close-button {
+    color:          var(--app-primary-color);
+    pointer-events: auto;
+    position:       absolute;
+    top:            0px;
+    right:          0px;
+  }
+
+  #search-button {
+    margin-left: 8px;
+  }
+
+</style>
+
+
+<iron-a11y-keys id="a11y" 
+                target="[[_a11yTarget]]" 
+                keys="enter"
+                on-keys-pressed="__a11yOnEnter">
+</iron-a11y-keys>
+
+<div id="input-wrapper">
+  <paper-input id="searchInput"
+               aria-describedby="a11y"
+               autocomplete="[[autocomplete]]"
+               autocorrect="[[autocorrect]]"
+               autocapitalize="[[autocapitalize]]"
+               label="[[label]]"
+               no-label-float
+               placeholder="[[placeholder]]"
+               tabindex="0"
+               type="[[type]]"
+               value="[[value]]"
+               on-focused-changed="__focusedChanged"
+               on-value-changed="__valueChanged">
+  </paper-input>
+  <paper-icon-button id="close-button"
+                     icon="input-icons:cancel" 
+                     class$="[[__computeHideSearchClearButton(value)]]"
+                     on-click="__clearBtnClicked"
+                     aria-label="Clear search">
+  </paper-icon-button>
+</div>
+
+
+<paper-icon-button id="search-button" 
+   								 icon="app-icons:search"
+                   on-click="__searchBtnClicked">
+</paper-icon-button>
+
+
+<suggestion-list id="list" 
+                 suggestions="[[suggestions]]">                       
+</suggestion-list>
