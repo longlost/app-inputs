@@ -1,5 +1,5 @@
 
-<style>
+<style include="app-shared-styles">
 
   :host {
     position:         absolute;
@@ -7,7 +7,7 @@
     right:            0px;
     left:             0px;
     background-color: transparent;
-    z-index:  				10;
+    z-index:          10;
     --suggestion-list-background-color:   var(--app-background-color);
     --suggestion-list-color:              var(--dark-text-color);
     --suggestion-list-close-button-color: var(--app-primary-color);
@@ -29,9 +29,6 @@
     transition:       transform 0.3s var(--spriteful-ease, ease-out);
     transform:        translateY(0px) scale(1, 0.1);
     background-color: var(--suggestion-list-background-color);
-    box-shadow:       0 2px 2px 0 rgba(0, 0, 0, 0.14),
-                      0 1px 5px 0 rgba(0, 0, 0, 0.12),
-                      0 3px 1px -2px rgba(0, 0, 0, 0.2);
   }
 
   .delay {
@@ -68,7 +65,7 @@
 <div id="xWrapper" 
      class="list-animators x-wrapper">
   <div id="yWrapper" 
-       class="list-animators y-wrapper">
+       class="list-animators y-wrapper shared-card">
 
     <paper-icon-button icon="app-icons:close" 
                        on-click="__closeBtnClicked">
@@ -80,11 +77,12 @@
 
       <template is="dom-repeat" 
                 items="[[_items]]"
+                strip-whitespace
                 on-dom-change="__domChanged">
 
         <paper-item class="item" 
                     on-click="__itemClicked">
-          [[item]]
+          <span class="shared-single-line-truncate">[[item]]</span>
         </paper-item>
         
       </template>

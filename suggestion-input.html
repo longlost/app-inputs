@@ -4,10 +4,11 @@
   :host {
     display:  block;
     position: relative;
+    --list-background-color: var(--app-body-color);
   }
 
   #list {
-    --suggestion-list-background-color: var(--app-body-color);
+    --suggestion-list-background-color: var(--list-background-color);
   }
 
 </style>
@@ -24,6 +25,8 @@
              value="[[value]]"
              on-focused-changed="__focusedChanged"
              on-value-changed="__valueChanged">
+  <slot name="prefix" slot="prefix"></slot>
+  <slot name="suffix" slot="suffix"></slot>
 </paper-input>
 
 

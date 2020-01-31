@@ -17,10 +17,11 @@ import {InputMixin}             from './input-mixin.js';
 import {consumeEvent, schedule} from '@longlost/utils/utils.js';
 import htmlString               from './search-input.html';
 import '@longlost/app-icons/app-icons.js';
-import '@polymer/paper-input/paper-input.js';
+import '@longlost/app-shared-styles/app-shared-styles.js';
 import '@polymer/paper-icon-button/paper-icon-button.js';
 import '@polymer/iron-a11y-keys/iron-a11y-keys.js';
 import './input-icons.js';
+import './custom-search-paper-input.js';
 import './suggestion-list.js';
 
 
@@ -35,19 +36,20 @@ class SearchInput extends InputMixin() {
   static get properties() {
     return {
 
+      // Minimum length of 'value' string before 
+      // the search button becomes enabled.
+      minlength: {
+        type: Number,
+        value: 2
+      },
+
       // Overwrite mixin prop for custom value.
-      label: {
+      placeholder: {
         type: String,
         value: 'Search'
       },
 
       suggestions: Array,
-
-      // Overwrite mixin prop for custom value.
-      type: {
-        type: String,
-        value: 'search'
-      },
 
       // Overwrite mixin prop for custom observer.
       value: {
@@ -55,7 +57,19 @@ class SearchInput extends InputMixin() {
         observer: '__valueObserver'
       },
 
-      _a11yTarget: Object
+      _a11yTarget: Object,
+
+      _clearBtnDisabled: {
+        type: Boolean,
+        value: true,
+        computed: '__computeClearBtnDisabled(value)'
+      },
+
+      _searchBtnDisabled: {
+        type: Boolean,
+        value: true,
+        computed: '__computeSearchBtnDisabled(value, minlength)'
+      }
 
     };
   }
@@ -64,12 +78,18 @@ class SearchInput extends InputMixin() {
   connectedCallback() {
     super.connectedCallback();
 
-    this._a11yTarget = this.$.searchInput;
+    this._a11yTarget = this.$.input;
   }
-  
 
-  __computeHideSearchClearButton(value) {
-    return value ? '' : 'hide-search-clear-btn';
+
+  __computeClearBtnDisabled(value) {
+    return !Boolean(value);
+  }
+
+
+  __computeSearchBtnDisabled(value, minlength) {
+    if (value && value.length >= minlength) { return false; }
+    return true;
   }
 
 
@@ -82,11 +102,10 @@ class SearchInput extends InputMixin() {
 
   async __search() {
     try {
-      if (!this.value || this.value.length < 2) { return; }  
 
       await this.clicked();
 
-      this.$.searchInput.blur();
+      this.$.input.blur();
 
       await schedule();
       await this.closeSuggestions();
@@ -101,6 +120,8 @@ class SearchInput extends InputMixin() {
 
 
   __a11yOnEnter() {
+    if (!this._searchBtnDisabled) { return; } 
+     
     this.__search();
   }
 
@@ -114,13 +135,13 @@ class SearchInput extends InputMixin() {
     try {
       await this.clicked();
 
-      this.$.searchInput.blur();
+      this.$.input.blur();
       this.value = '';
       this.closeSuggestions();
 
       await schedule();
 
-      this.$.searchInput.focus();
+      this.$.input.focus();
       this.fire('input-cleared');
     }
     catch (error) {

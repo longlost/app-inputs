@@ -21,6 +21,7 @@ import {
 }                 from '@longlost/utils/utils.js';
 import htmlString from './suggestion-list.html';
 import '@longlost/app-icons/app-icons.js';
+import '@longlost/app-shared-styles/app-shared-styles.js';
 import '@polymer/paper-listbox/paper-listbox.js';
 import '@polymer/paper-item/paper-item.js';
 import '@polymer/paper-icon-button/paper-icon-button.js';
@@ -41,8 +42,8 @@ class SuggestionList extends AppElement {
       // Test on small mobile when changing this
       // to more than 10.
       max: {
-      	type: Number,
-      	value: 10
+        type: Number,
+        value: 10
       },
 
       // List input.
@@ -57,8 +58,8 @@ class SuggestionList extends AppElement {
 
       // Directly drives template 'dom-repeat'.
       _items: {
-      	type: Array,
-      	computed: '__computeItems(_cached, max)'
+        type: Array,
+        computed: '__computeItems(_cached, max)'
       },
 
       _openBusy: Boolean
@@ -75,13 +76,13 @@ class SuggestionList extends AppElement {
 
 
   __computeItems(cached, max) {
-  	if (!Array.isArray(cached)) { return; }
+    if (!Array.isArray(cached)) { return; }
 
-  	if (typeof max !== 'number') {
-  		throw new TypeError(`'max' must be a number.`);
-  	}
+    if (typeof max !== 'number') {
+      throw new TypeError(`'max' must be a number.`);
+    }
 
-  	return cached.slice(0, max);
+    return cached.slice(0, max);
   }
 
 
