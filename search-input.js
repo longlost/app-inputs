@@ -120,7 +120,7 @@ class SearchInput extends InputMixin() {
 
 
   __a11yOnEnter() {
-    if (!this._searchBtnDisabled) { return; } 
+    if (this._searchBtnDisabled) { return; } 
      
     this.__search();
   }
