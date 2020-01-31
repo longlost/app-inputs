@@ -69,7 +69,11 @@ export const InputMixin = () => {
           value: true
         },
 
-        focused: Boolean,      
+        focused: {
+          type: Boolean,      
+          value: false,
+          reflectToAttribute: true,
+        },
 
         label: String,
 
