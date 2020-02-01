@@ -15,12 +15,13 @@
 
 
 <paper-input class="shared-paper-input"
+             allowed-pattern="[[allowedPattern]]"
              autocomplete="[[autocomplete]]"
              autocorrect="[[autocorrect]]"
              autocapitalize="[[autocapitalize]]"
              label="[[label]]"
              placeholder="[[placeholder]]"
-             tabindex="0"
+             tabindex="[[tabindex]]"
              type="[[type]]"
              value="[[value]]"
              on-focused-changed="__focusedChanged"
@@ -31,6 +32,5 @@
 
 
 <suggestion-list id="list" 
-                 suggestions="[[suggestions]]"
-                 on-suggestion-selected="__suggestionSelected">                       
+                 suggestions="[[suggestions]]">                       
 </suggestion-list>

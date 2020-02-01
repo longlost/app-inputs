@@ -114,7 +114,12 @@ class SuggestionList extends AppElement {
       await this.clicked();
       await this.close();
 
-      this.fire('suggestion-selected', {selected: event.model.item});
+      const {index, item} = event.model;
+
+      this.fire('suggestion-selected', {
+        index,
+        selected: item
+      });
     }
     catch (error) {
       if (error === 'click debounced') { return; }

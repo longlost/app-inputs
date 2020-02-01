@@ -36,11 +36,6 @@ class SuggestionInput extends InputMixin() {
   }
 
 
-  __suggestionSelected(event) {
-    this.value = event.detail.selected;
-  }
-
-
   closeSuggestions() {
     return this.$.list.close();
   }
