@@ -9,6 +9,9 @@
   *  Properites:
   *
   *
+  *    allowed-pattern - <String> Regex for underlying Polymer input allowed-pattern.
+  *
+  *
   *    autocomplete - <Boolean> Underlying Polymer input autocomplete.
   *  
   *
@@ -25,6 +28,9 @@
   *
   *
   *    placeholder - <String> Underlying Polymer input placeholder.
+  *
+  *
+  *    tabindex - <Number> Underlying Polymer input tabindex.
   *
   *
   *    type - <String> Underlying Polymer input type.
@@ -54,6 +60,8 @@ export const InputMixin = () => {
     static get properties() {
       return {
 
+        allowedPattern: String,
+
         autocomplete: {
           type: Boolean,
           value: true
@@ -78,6 +86,11 @@ export const InputMixin = () => {
         label: String,
 
         placeholder: String,
+
+        tabindex: {
+          type: Number,
+          value: 0
+        },
 
         type: String,
         
