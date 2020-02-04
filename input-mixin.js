@@ -20,6 +20,9 @@
   *
   *    autocapitalize - <Boolean> Underlying Polymer input autocapitalize.
   *
+  *
+  *    char-counter - <Boolean> Underlying Polymer input char-counter.
+  *
   *  
   *    focused - <Boolean> Underlying Polymer input focused state.
   *
@@ -62,20 +65,13 @@ export const InputMixin = () => {
 
         allowedPattern: String,
 
-        autocomplete: {
-          type: Boolean,
-          value: true
-        },
+        autocomplete: Boolean,
 
-        autocorrect: {
-          type: Boolean,
-          value: true
-        },
+        autocorrect: Boolean,
         
-        autocapitalize: {
-          type: Boolean,
-          value: true
-        },
+        autocapitalize: Boolean,
+
+        charCounter: Boolean,
 
         focused: {
           type: Boolean,      
