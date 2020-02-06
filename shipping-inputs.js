@@ -1,21 +1,21 @@
 
 /**
- 	* `shipping-inputs`
- 	*
- 	* 	Common address shipping inputs.
- 	*
- 	*
- 	*
- 	* @customElement
- 	* @polymer
- 	* @demo demo/index.html
- 	*
- 	**/
+  * `shipping-inputs`
+  *
+  *   Common address shipping inputs.
+  *
+  *
+  *
+  * @customElement
+  * @polymer
+  * @demo demo/index.html
+  *
+  **/
 
 import {PolymerElement, html} from '@polymer/polymer/polymer-element.js';
 import htmlString             from './shipping-inputs.html';
 import '@polymer/paper-input/paper-input.js';
-import '@longlost/edit-input/edit-input.js';
+import './edit-input.js';
 
 
 class ShippingInputs extends PolymerElement {
