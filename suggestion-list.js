@@ -157,6 +157,7 @@ class SuggestionList extends AppElement {
     if (this._openBusy) { return; }
 
     this._openBusy = true;
+    this.style['display'] = 'block';
     this.$.xWrapper.classList.remove('delay');
     this.$.yWrapper.classList.add('delay');
     this.$.listbox.classList.add('list-delayed-transition');
@@ -189,6 +190,7 @@ class SuggestionList extends AppElement {
 
     await wait(250);
 
+    this.style['display'] = 'none';
     this._cached    = undefined;
     this._closeBusy = false;
   }
