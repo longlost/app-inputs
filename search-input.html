@@ -16,6 +16,7 @@
     --input-border-radius:     8px;
     --input-placeholder-color: var(--disabled-text-color);
     --input-width:             100%;
+    --input-text-overflow:     ellipsis;
   }
  
   #input {
@@ -34,6 +35,8 @@
       position: relative;
       bottom:   10px;
     };
+
+    --paper-input-text-overflow: var(--input-text-overflow);
 
     --paper-input-container-color: var(--input-placeholder-color);
 

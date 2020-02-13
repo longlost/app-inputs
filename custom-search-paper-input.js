@@ -11,11 +11,11 @@ found at http://polymer.github.io/PATENTS.txt
 
 
 /**
-	*
-	* Added a <form> element wrapper in order to
-	* get the 'search' button to render in mobile keyboards.
-	*
-	**/
+  *
+  * Added a <form> element wrapper in order to
+  * get the 'search' button to render in mobile keyboards.
+  *
+  **/
 
 
 
@@ -110,6 +110,7 @@ Polymer({
       input {
         /* Firefox sets a min-width on the input, which can cause layout issues */
         min-width: 0;
+        text-overflow: var(--paper-input-text-overflow);
       }
 
       /* In 1.x, the <input> is distributed to paper-input-container, which styles it.
@@ -170,17 +171,17 @@ Polymer({
         color: var(--paper-input-container-color, var(--secondary-text-color));
       }
 
-		  input[type="search"]::-webkit-search-decoration,
-		  input[type="search"]::-webkit-search-cancel-button,
-		  input[type="search"]::-webkit-search-results-button,
-		  input[type="search"]::-webkit-search-results-decoration {
-		    display: none;
-		  }
+      input[type="search"]::-webkit-search-decoration,
+      input[type="search"]::-webkit-search-cancel-button,
+      input[type="search"]::-webkit-search-results-button,
+      input[type="search"]::-webkit-search-results-decoration {
+        display: none;
+      }
 
-		  input[type="search"] {
-		    -moz-appearance:    none;
-		    -webkit-appearance: none;
-		  }
+      input[type="search"] {
+        -moz-appearance:    none;
+        -webkit-appearance: none;
+      }
 
       label {
         pointer-events: none;
@@ -189,35 +190,35 @@ Polymer({
     </style>
 
     <!-- 
-    	The form element is only here in order to display the 
-    	'Search' button in mobile keyboards such as iOS Safari. 
+      The form element is only here in order to display the 
+      'Search' button in mobile keyboards such as iOS Safari. 
     -->
     <form action="javascript:void(0)">
 
-	    <paper-input-container id="container" no-label-float="[[noLabelFloat]]" always-float-label="[[_computeAlwaysFloatLabel(alwaysFloatLabel,placeholder)]]" auto-validate$="[[autoValidate]]" disabled$="[[disabled]]" invalid="[[invalid]]">
+      <paper-input-container id="container" no-label-float="[[noLabelFloat]]" always-float-label="[[_computeAlwaysFloatLabel(alwaysFloatLabel,placeholder)]]" auto-validate$="[[autoValidate]]" disabled$="[[disabled]]" invalid="[[invalid]]">
 
-	      <slot name="prefix" slot="prefix"></slot>
+        <slot name="prefix" slot="prefix"></slot>
 
-	      <label hidden$="[[!label]]" aria-hidden="true" for$="[[_inputId]]" slot="label">[[label]]</label>
+        <label hidden$="[[!label]]" aria-hidden="true" for$="[[_inputId]]" slot="label">[[label]]</label>
 
-	      <!-- Need to bind maxlength so that the paper-input-char-counter works correctly -->
-	      <iron-input bind-value="{{value}}" slot="input" class="input-element" id$="[[_inputId]]" maxlength$="[[maxlength]]" allowed-pattern="[[allowedPattern]]" invalid="{{invalid}}" validator="[[validator]]">
-	        <input aria-labelledby$="[[_ariaLabelledBy]]" aria-describedby$="[[_ariaDescribedBy]]" disabled$="[[disabled]]" title$="[[title]]" type$="[[type]]" pattern$="[[pattern]]" required$="[[required]]" autocomplete$="[[autocomplete]]" autofocus$="[[autofocus]]" inputmode$="[[inputmode]]" minlength$="[[minlength]]" maxlength$="[[maxlength]]" min$="[[min]]" max$="[[max]]" step$="[[step]]" name$="[[name]]" placeholder$="[[placeholder]]" readonly$="[[readonly]]" list$="[[list]]" size$="[[size]]" autocapitalize$="[[autocapitalize]]" autocorrect$="[[autocorrect]]" on-change="_onChange" tabindex$="[[tabIndex]]" autosave$="[[autosave]]" results$="[[results]]" accept$="[[accept]]" multiple$="[[multiple]]" role$="[[inputRole]]" aria-haspopup$="[[inputAriaHaspopup]]">
-	      </iron-input>
+        <!-- Need to bind maxlength so that the paper-input-char-counter works correctly -->
+        <iron-input bind-value="{{value}}" slot="input" class="input-element" id$="[[_inputId]]" maxlength$="[[maxlength]]" allowed-pattern="[[allowedPattern]]" invalid="{{invalid}}" validator="[[validator]]">
+          <input aria-labelledby$="[[_ariaLabelledBy]]" aria-describedby$="[[_ariaDescribedBy]]" disabled$="[[disabled]]" title$="[[title]]" type$="[[type]]" pattern$="[[pattern]]" required$="[[required]]" autocomplete$="[[autocomplete]]" autofocus$="[[autofocus]]" inputmode$="[[inputmode]]" minlength$="[[minlength]]" maxlength$="[[maxlength]]" min$="[[min]]" max$="[[max]]" step$="[[step]]" name$="[[name]]" placeholder$="[[placeholder]]" readonly$="[[readonly]]" list$="[[list]]" size$="[[size]]" autocapitalize$="[[autocapitalize]]" autocorrect$="[[autocorrect]]" on-change="_onChange" tabindex$="[[tabIndex]]" autosave$="[[autosave]]" results$="[[results]]" accept$="[[accept]]" multiple$="[[multiple]]" role$="[[inputRole]]" aria-haspopup$="[[inputAriaHaspopup]]">
+        </iron-input>
 
-	      <slot name="suffix" slot="suffix"></slot>
+        <slot name="suffix" slot="suffix"></slot>
 
-	      <template is="dom-if" if="[[errorMessage]]">
-	        <paper-input-error aria-live="assertive" slot="add-on">[[errorMessage]]</paper-input-error>
-	      </template>
+        <template is="dom-if" if="[[errorMessage]]">
+          <paper-input-error aria-live="assertive" slot="add-on">[[errorMessage]]</paper-input-error>
+        </template>
 
-	      <template is="dom-if" if="[[charCounter]]">
-	        <paper-input-char-counter slot="add-on"></paper-input-char-counter>
-	      </template>
+        <template is="dom-if" if="[[charCounter]]">
+          <paper-input-char-counter slot="add-on"></paper-input-char-counter>
+        </template>
 
-	    </paper-input-container>
+      </paper-input-container>
 
-	  </form>
+    </form>
   `,
 
   behaviors: [PaperInputBehavior, IronFormElementBehavior],
