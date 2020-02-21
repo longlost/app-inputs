@@ -8,7 +8,6 @@
     position:        relative;
     height:          64px;
     padding:         0px 16px;
-    background-color:          var(--app-primary-color);
     --list-background-color:   var(--app-body-color);
     --search-button-color:     var(--app-primary-color);
     --clear-button-color:      var(--app-primary-color);
@@ -26,7 +25,7 @@
     width:            var(--input-width);
     border-radius:    var(--input-border-radius);
     background-color: var(--input-background-color);
-
+    
     --paper-input-container: {
       /*
         Cannot use flex here because then the 
@@ -37,6 +36,8 @@
     };
 
     --paper-input-text-overflow: var(--input-text-overflow);
+
+    --paper-input-container-input-color: currentColor;
 
     --paper-input-container-color: var(--input-placeholder-color);
 

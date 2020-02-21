@@ -40,10 +40,10 @@
   resolved "https://registry.yarnpkg.com/@longlost/lambda/-/lambda-2.0.5.tgz#40040c3a2567bd9f7c1453d157666d9f5f93f1b2"
   integrity sha512-5DnvL+g6GLib85YvZ7PqXypJl1/Y2I8gfIsaMxoGcmDLAJlAwBfUd6OnQZqZakaDVbXYlEi5MA3L5fj5Qwt6SQ==
 
-"@longlost/lambda@^2.1.1":
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/@longlost/lambda/-/lambda-2.1.1.tgz#0e8ad44ee941a4e7e0802449482ccc8f64d88a0c"
-  integrity sha512-AEBQSU1A2Mwj6s6zJSA8BKsLQ9/5ambgEOaI+mgO7kfbCnC9FQhWgXJKDQXGoZdFJC1HC6kTqv9dTYTRxFvmSw==
+"@longlost/lambda@^2.2.0":
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/@longlost/lambda/-/lambda-2.2.0.tgz#f9ae362590222896d64272df580a281929081051"
+  integrity sha512-hjwZPIcs1FPC1tHG6moCAX0bjtFHIRqVg/jBgsnLhGV0p3Dc0bGo1Z+lGYhEEKZnZFgxhxHY3+PBXw0brgPkPg==
 
 "@longlost/pencil-to-check-icon@^1.0.1":
   version "1.0.1"
