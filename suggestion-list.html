@@ -19,7 +19,7 @@
   }
 
   .x-wrapper {
-    transition:       transform 0.2s var(--spriteful-ease, ease-out);
+    transition:       transform 0.2s var(--custom-ease, ease-out);
     transform:        translateY(0px) scale(0, 0.1); 
     background-color: transparent;    
   }
@@ -27,7 +27,7 @@
   .y-wrapper {
     display:          flex;
     flex-direction:   column; 
-    transition:       transform 0.3s var(--spriteful-ease, ease-out);
+    transition:       transform 0.3s var(--custom-ease, ease-out);
     transform:        translateY(0px) scale(1, 0.1);
     background-color: var(--suggestion-list-background-color);
   }
@@ -39,7 +39,7 @@
   .list {
     width:      100%;
     padding:    0px;
-    transition: transform 0.2s var(--spriteful-ease, ease-out), opacity 0.1s ease-in;
+    transition: transform 0.2s var(--custom-ease, ease-out), opacity 0.1s ease-in;
     transform:  translateY(8px) scale(1, 1);
     opacity:    0;
     color:      var(--suggestion-list-color);
@@ -47,7 +47,7 @@
   }
 
   .list-delayed-transition {    
-    transition: transform 0.3s var(--spriteful-ease, ease-out) 0.2s, opacity 0.1s ease-in 0.3s;
+    transition: transform 0.3s var(--custom-ease, ease-out) 0.2s, opacity 0.1s ease-in 0.3s;
   }
 
   .open-list {
