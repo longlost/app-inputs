@@ -1,15 +1,15 @@
 
 /**
- 	* `edit-input`
- 	* 
- 	*
- 	*
- 	* @customElement
- 	* @polymer
- 	* @demo demo/index.html
- 	*
- 	*
- 	**/
+  * `edit-input`
+  * 
+  *
+  *
+  * @customElement
+  * @polymer
+  * @demo demo/index.html
+  *
+  *
+  **/
 
 import {
   AppElement, 
@@ -57,10 +57,18 @@ class EditInput extends AppElement {
 
       _paperInputNode: Object,
 
+      _raised: Boolean,
+
       // Controls edit icon state.
       _showCheckButton: {
         type: Boolean,
         computed: '__computeShowCheckButton(_value, _invalid)'
+      },
+
+      _tabindex: {
+        type: Number,
+        value: -1,
+        computed: '__computeTabindex(_noPaperRipple)'
       },
 
       _value: String
@@ -100,11 +108,21 @@ class EditInput extends AppElement {
   }
 
 
+  __computeCheckedColor(noPaperRipple) {
+    return noPaperRipple ? 'is-check' : '';
+  }
+
+
   __computeColor(disabled, invalid, focused) {
     if (disabled) { return 'disabled'; }
     if (invalid)  { return 'invalid';  }
     if (focused)  { return 'focused';  }
     return '';
+  }
+
+
+  __computeTabindex(noPaperRipple) {
+    return noPaperRipple ? 0 : -1;
   }
 
 
@@ -132,6 +150,11 @@ class EditInput extends AppElement {
     this._value   = value;
 
     this.fire('edit-input-changed', {kind: this.kind, value});
+  }
+
+
+  __btnFocusedChanged(event) {
+    this._raised = event.detail.value;
   }
 
 
@@ -197,9 +220,10 @@ class EditInput extends AppElement {
   }
 
 
-  async __editButtonClicked() {
+  async __editButtonClicked(event) {
     try {
-      await this.clicked();
+
+      await this.__thisClicked(event);
 
       if (this._invalid) {
         warn('This input has an invalid format');
