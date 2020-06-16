@@ -16,6 +16,7 @@
   #inputSlot::slotted(*) {
     display:      inline-block;
     width:        100%;
+    min-height:   74px;
     margin-right: 40px;
     --paper-input-container-color:       var(--secondary-text-color);
     --paper-input-container-input-color: var(--dark-text-color);
@@ -24,7 +25,7 @@
       display: none;
     };
     --paper-input-container-underline-focus: { /* broken paper-input fix (3.0.0-pre.1) */
-      transition: transform 0.25s ease-in-out;
+      transition: transform 0.25s var(--custom-ease, ease-in-out);
     };
   }
 
@@ -33,9 +34,9 @@
     right:        8px;
     padding-left: 40px;
     background:   linear-gradient(
-    	to right, 
-    	var(--text-truncate-fade), 
-    	var(--app-background-color) 40%
+      to right, 
+      var(--text-truncate-fade), 
+      var(--app-background-color) 40%
     );
   }
 
@@ -67,6 +68,10 @@
     transform:      scale(1, 1);
   }
 
+  .is-check {    
+    color: var(--app-accent-color);
+  }
+
 </style>
 
 
@@ -79,9 +84,12 @@
 
 <div id="btn-faded-background">
   <paper-button noink="[[!_noPaperRipple]]" 
-                on-click="__editButtonClicked">
+                tabindex$="[[_tabindex]]"
+                raised="[[_raised]]"
+                on-click="__editButtonClicked"
+                on-focused-changed="__btnFocusedChanged">
     <pencil-to-check-icon id="editIcon" 
-                          class$="edit-icon [[__computeEditIconEntry(disabled)]] [[__computeColor(disabled, _invalid, _focused)]]">
+                          class$="edit-icon [[__computeEditIconEntry(disabled)]] [[__computeColor(disabled, _invalid, _focused)]] [[__computeCheckedColor(_noPaperRipple)]]">
     </pencil-to-check-icon>
   </paper-button>
 </div>
