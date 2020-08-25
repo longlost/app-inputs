@@ -11,16 +11,9 @@
   *
   **/
 
-import {
-  AppElement, 
-  html
-}                 from '@longlost/app-element/app-element.js';
-import {
-  getRootTarget, 
-  listen,
-  warn
-}                 from '@longlost/utils/utils.js';
-import htmlString from './edit-input.html';
+import {AppElement, html}    from '@longlost/app-element/app-element.js';
+import {getRootTarget, warn} from '@longlost/utils/utils.js';
+import htmlString            from './edit-input.html';
 import '@longlost/icon-to-spinner/icon-to-spinner.js';
 import '@longlost/pencil-to-check-icon/pencil-to-check-icon.js';
 import '@polymer/paper-button/paper-button.js';
@@ -88,13 +81,27 @@ class EditInput extends AppElement {
   connectedCallback() {
     super.connectedCallback();
 
-    const slottedInput = this.slotNodes('#inputSlot').find(node => 
+    this._slottedInput = this.slotNodes('#inputSlot').find(node => 
                            node.nodeName !== '#text');
-    this._slottedInput = slottedInput;
-    listen(slottedInput, 'focused-changed', this.__inputFocusedChanged.bind(this));
-    listen(slottedInput, 'invalid-changed', this.__inputInvalidChanged.bind(this));
-    listen(slottedInput, 'value-changed',   this.__inputValueChanged.bind(this));
-    listen(this,         'click',           this.__thisClicked.bind(this));
+
+    this._slottedInput.addEventListener('focused-changed', this.__inputFocusedChanged.bind(this));
+    this._slottedInput.addEventListener('invalid-changed', this.__inputInvalidChanged.bind(this));
+    this._slottedInput.addEventListener('value-changed',   this.__inputValueChanged.bind(this));
+
+    this.addEventListener('click', this.__thisClicked.bind(this));
+  }
+
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+
+    if (this._slottedInput) {      
+      this._slottedInput.removeEventListener('focused-changed', this.__inputFocusedChanged.bind(this));
+      this._slottedInput.removeEventListener('invalid-changed', this.__inputInvalidChanged.bind(this));
+      this._slottedInput.removeEventListener('value-changed',   this.__inputValueChanged.bind(this));
+    }
+
+    this.removeEventListener('click', this.__thisClicked.bind(this));
   }
 
 
