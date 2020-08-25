@@ -3,6 +3,21 @@
 
   :host {
     display: block;
+
+    --app-textarea-color:       var(--secondary-text-color);
+    --app-textarea-input-color: var(--dark-text-color);
+    --app-textarea-focus-color: var(--app-primary-color);
+  }
+
+  icon-prefix-input {
+    --prefix-icon-color:         var(--app-textarea-color);
+    --prefix-icon-focused-color: var(--app-textarea-focus-color);
+  }
+
+  .shared-paper-input {
+    --paper-input-container-color:       var(--app-textarea-color);
+    --paper-input-container-input-color: var(--app-textarea-input-color);
+    --paper-input-container-focus-color: var(--app-textarea-focus-color);
   }
 
 </style>
