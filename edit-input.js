@@ -81,14 +81,19 @@ class EditInput extends AppElement {
   connectedCallback() {
     super.connectedCallback();
 
+    this.__inputFocusedChanged = this.__inputFocusedChanged.bind(this);
+    this.__inputInvalidChanged = this.__inputInvalidChanged.bind(this);
+    this.__inputValueChanged   = this.__inputValueChanged.bind(this);
+    this.__thisClicked         = this.__thisClicked.bind(this);
+
     this._slottedInput = this.slotNodes('#inputSlot').find(node => 
                            node.nodeName !== '#text');
 
-    this._slottedInput.addEventListener('focused-changed', this.__inputFocusedChanged.bind(this));
-    this._slottedInput.addEventListener('invalid-changed', this.__inputInvalidChanged.bind(this));
-    this._slottedInput.addEventListener('value-changed',   this.__inputValueChanged.bind(this));
+    this._slottedInput.addEventListener('focused-changed', this.__inputFocusedChanged);
+    this._slottedInput.addEventListener('invalid-changed', this.__inputInvalidChanged);
+    this._slottedInput.addEventListener('value-changed',   this.__inputValueChanged);
 
-    this.addEventListener('click', this.__thisClicked.bind(this));
+    this.addEventListener('click', this.__thisClicked);
   }
 
 
@@ -96,12 +101,12 @@ class EditInput extends AppElement {
     super.disconnectedCallback();
 
     if (this._slottedInput) {      
-      this._slottedInput.removeEventListener('focused-changed', this.__inputFocusedChanged.bind(this));
-      this._slottedInput.removeEventListener('invalid-changed', this.__inputInvalidChanged.bind(this));
-      this._slottedInput.removeEventListener('value-changed',   this.__inputValueChanged.bind(this));
+      this._slottedInput.removeEventListener('focused-changed', this.__inputFocusedChanged);
+      this._slottedInput.removeEventListener('invalid-changed', this.__inputInvalidChanged);
+      this._slottedInput.removeEventListener('value-changed',   this.__inputValueChanged);
     }
 
-    this.removeEventListener('click', this.__thisClicked.bind(this));
+    this.removeEventListener('click', this.__thisClicked);
   }
 
 
