@@ -1,5 +1,5 @@
 
-<style>
+<style include="app-shared-styles">
 
   :host {
     display:     flex;
@@ -38,10 +38,6 @@
       var(--text-truncate-fade), 
       var(--app-background-color) 40%
     );
-  }
-
-  paper-button {
-    @apply --custom-icon-paper-button-mixin;
   }
 
   .edit-icon {
@@ -83,7 +79,8 @@
 <slot id="inputSlot"></slot>
 
 <div id="btn-faded-background">
-  <paper-button noink="[[!_noPaperRipple]]" 
+  <paper-button class="shared-custom-icon-paper-button"
+                noink="[[!_noPaperRipple]]" 
                 tabindex$="[[_tabindex]]"
                 raised="[[_raised]]"
                 on-click="__editButtonClicked"
