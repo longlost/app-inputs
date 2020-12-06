@@ -12,12 +12,12 @@
   *
   **/
 
-import {html}                   from '@longlost/app-element/app-element.js';
+import {html}                   from '@longlost/app-core/app-element.js';
+import {consumeEvent, schedule} from '@longlost/app-core/utils.js';
 import {InputMixin}             from './input-mixin.js';
-import {consumeEvent, schedule} from '@longlost/utils/utils.js';
 import htmlString               from './search-input.html';
-import '@longlost/app-icons/app-icons.js';
-import '@longlost/app-shared-styles/app-shared-styles.js';
+import '@longlost/app-core/app-icons.js';
+import '@longlost/app-core/app-shared-styles.js';
 import '@polymer/paper-icon-button/paper-icon-button.js';
 import '@polymer/iron-a11y-keys/iron-a11y-keys.js';
 import './input-icons.js';

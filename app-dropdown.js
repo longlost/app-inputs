@@ -22,10 +22,10 @@
   **/
 
 
-import {html}       from '@longlost/app-element/app-element.js';
+import {html}       from '@longlost/app-core/app-element.js';
 import {InputMixin} from './input-mixin.js';
 import htmlString   from './app-dropdown.html';
-import '@longlost/app-icons/app-icons.js';
+import '@longlost/app-core/app-icons.js';
 import '@polymer/paper-dropdown-menu/paper-dropdown-menu.js';
 import '@polymer/paper-listbox/paper-listbox.js';
 import './icon-prefix-input.js';

@@ -1,6 +1,6 @@
 {
   "name": "@longlost/app-inputs",
-  "version": "1.4.3",
+  "version": "2.0.0",
   "description": "A collection of commonly used input elements.",
   "main": "index.js",
   "scripts": {
@@ -17,13 +17,9 @@
   },
   "homepage": "https://github.com/longlost/app-inputs#readme",
   "dependencies": {
-    "@longlost/app-element": "^2.0.0",
-    "@longlost/app-icons": "^1.0.12",
-    "@longlost/app-shared-styles": "^2.0.15",
-    "@longlost/icon-to-spinner": "^1.0.2",
-    "@longlost/lambda": "^2.2.0",
-    "@longlost/pencil-to-check-icon": "^1.0.2",
-    "@longlost/utils": "^2.0.0",
+    "@longlost/app-core": "^1.0.0",
+    "@longlost/icon-to-spinner": "^2.0.0",
+    "@longlost/pencil-to-check-icon": "^1.0.3",
     "@polymer/gold-phone-input": "^3.0.1",
     "@polymer/iron-a11y-keys": "^3.0.1",
     "@polymer/iron-form-element-behavior": "^3.0.1",

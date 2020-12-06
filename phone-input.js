@@ -25,10 +25,10 @@
   **/
 
 
-import {html}       from '@longlost/app-element/app-element.js';
+import {html}       from '@longlost/app-core/app-element.js';
 import {InputMixin} from './input-mixin.js';
 import htmlString   from './phone-input.html';
-import '@longlost/app-icons/app-icons.js';
+import '@longlost/app-core/app-icons.js';
 import '@polymer/gold-phone-input/gold-phone-input.js';
 import './icon-prefix-input.js';
 

@@ -51,9 +51,9 @@
   *
   **/
 
-import {AppElement}   from '@longlost/app-element/app-element.js';
-import {consumeEvent} from '@longlost/utils/utils.js';
-import '@longlost/app-shared-styles/app-shared-styles.js';
+import {AppElement}   from '@longlost/app-core/app-element.js';
+import {consumeEvent} from '@longlost/app-core/utils.js';
+import '@longlost/app-core/app-shared-styles.js';
 
 
 export const InputMixin = () => {

@@ -3,7 +3,7 @@
   * `icon-prefix-input`
   * 
   *   Custom styled element that allows an <iron-icon>
-  * 	prefix like paper-input's prefix slot.
+  *   prefix like paper-input's prefix slot.
   *
   *
   *
@@ -25,8 +25,8 @@
   **/
 
 
-import {AppElement, html} from '@longlost/app-element/app-element.js';
-import htmlString      		from './icon-prefix-input.html';
+import {AppElement, html} from '@longlost/app-core/app-element.js';
+import htmlString         from './icon-prefix-input.html';
 import '@polymer/iron-icon/iron-icon.js';
 
 
@@ -41,7 +41,7 @@ class IconPrefixInput extends AppElement {
   static get properties() {
     return {
 
-    	focused: Boolean,
+      focused: Boolean,
 
       icon: String
 

@@ -22,7 +22,7 @@
   **/
 
 
-import {html}       from '@longlost/app-element/app-element.js';
+import {html}       from '@longlost/app-core/app-element.js';
 import {InputMixin} from './input-mixin.js';
 import htmlString   from './app-textarea.html';
 import '@polymer/paper-input/paper-textarea.js';
