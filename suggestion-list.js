@@ -11,17 +11,11 @@
   **/
 
 
-import {
-  AppElement, 
-  html
-}                 from '@longlost/app-element/app-element.js';
-import {
-  schedule, 
-  wait
-}                 from '@longlost/utils/utils.js';
-import htmlString from './suggestion-list.html';
-import '@longlost/app-icons/app-icons.js';
-import '@longlost/app-shared-styles/app-shared-styles.js';
+import {AppElement, html} from '@longlost/app-core/app-element.js';
+import {schedule, wait}   from '@longlost/app-core/utils.js';
+import htmlString         from './suggestion-list.html';
+import '@longlost/app-core/app-icons.js';
+import '@longlost/app-core/app-shared-styles.js';
 import '@polymer/paper-listbox/paper-listbox.js';
 import '@polymer/paper-item/paper-item.js';
 import '@polymer/paper-icon-button/paper-icon-button.js';

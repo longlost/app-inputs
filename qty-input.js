@@ -15,11 +15,11 @@
   *
   **/
 
-import {AppElement, html} from '@longlost/app-element/app-element.js';
-import {clamp}            from '@longlost/lambda/lambda.js';
-import {consumeEvent}     from '@longlost/utils/utils.js';
+import {AppElement, html} from '@longlost/app-core/app-element.js';
+import {clamp}            from '@longlost/app-core/lambda.js';
+import {consumeEvent}     from '@longlost/app-core/utils.js';
 import htmlString         from './qty-input.html';
-import '@longlost/app-icons/app-icons.js';
+import '@longlost/app-core/app-icons.js';
 import '@polymer/paper-input/paper-input.js';
 import '@polymer/paper-icon-button/paper-icon-button.js';
 

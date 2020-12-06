@@ -11,10 +11,10 @@
   *
   **/
 
-import {AppElement, html}    from '@longlost/app-element/app-element.js';
-import {getRootTarget, warn} from '@longlost/utils/utils.js';
+import {AppElement, html}    from '@longlost/app-core/app-element.js';
+import {getRootTarget, warn} from '@longlost/app-core/utils.js';
 import htmlString            from './edit-input.html';
-import '@longlost/app-shared-styles/app-shared-styles.js';
+import '@longlost/app-core/app-shared-styles.js';
 import '@longlost/icon-to-spinner/icon-to-spinner.js';
 import '@longlost/pencil-to-check-icon/pencil-to-check-icon.js';
 import '@polymer/paper-button/paper-button.js';

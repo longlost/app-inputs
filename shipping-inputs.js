@@ -14,7 +14,9 @@
 
 import {PolymerElement, html} from '@polymer/polymer/polymer-element.js';
 import htmlString             from './shipping-inputs.html';
+import '@longlost/app-core/app-icons.js';
 import '@polymer/paper-input/paper-input.js';
+import './input-icons.js';
 import './edit-input.js';
 
 
