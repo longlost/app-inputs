@@ -208,6 +208,7 @@ class EditInput extends AppElement {
     const hex = getComputedStyle(this, 'background-color');
 
     this.updateStyles({
+      '--input-truncate-base': hexToRGBA(hex, 1)
       '--input-truncate-fade': hexToRGBA(hex, 0)
     });
   }
