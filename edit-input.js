@@ -11,9 +11,20 @@
   *
   **/
 
-import {AppElement, html}    from '@longlost/app-core/app-element.js';
-import {getRootTarget, warn} from '@longlost/app-core/utils.js';
-import htmlString            from './edit-input.html';
+import {
+  AppElement, 
+  html
+} from '@longlost/app-core/app-element.js';
+
+import {hexToRGBA} from '@longlost/app-core/lambda.js';
+
+import {
+  getComputedStyle, 
+  getRootTarget, 
+  warn
+} from '@longlost/app-core/utils.js';
+
+import htmlString from './edit-input.html';
 import '@longlost/app-core/app-shared-styles.js';
 import '@longlost/icon-to-spinner/icon-to-spinner.js';
 import '@longlost/pencil-to-check-icon/pencil-to-check-icon.js';
@@ -22,6 +33,7 @@ import '@polymer/paper-ripple/paper-ripple.js';
 
 
 class EditInput extends AppElement {
+
   static get is() { return 'edit-input'; }
 
   static get template() {
@@ -39,6 +51,11 @@ class EditInput extends AppElement {
       kind: String,
 
       disabled: {
+        type: Boolean,
+        value: false
+      },
+
+      _darkMode: {
         type: Boolean,
         value: false
       },
@@ -73,73 +90,90 @@ class EditInput extends AppElement {
 
   static get observers() {
     return [
+      '__disabledChanged(disabled)',
       '__showCheckButtonChanged(_showCheckButton, disabled)',
-      '__disabledChanged(disabled)'
+      '__updateTruncateFade(_darkMode)'
     ];
-  } 
-  
+  }
 
-  connectedCallback() {
-    super.connectedCallback();
 
+  constructor() {
+
+    super();
+
+    this.__darkModeHandler     = this.__darkModeHandler.bind(this);
     this.__inputFocusedChanged = this.__inputFocusedChanged.bind(this);
     this.__inputInvalidChanged = this.__inputInvalidChanged.bind(this);
     this.__inputValueChanged   = this.__inputValueChanged.bind(this);
     this.__thisClicked         = this.__thisClicked.bind(this);
 
-    this._slottedInput = this.slotNodes('#inputSlot').find(node => 
-                           node.nodeName !== '#text');
+    this._app      = document.querySelector('#app');
+    this._darkMode = this._app.darkMode;
 
-    this._slottedInput.addEventListener('focused-changed', this.__inputFocusedChanged);
-    this._slottedInput.addEventListener('invalid-changed', this.__inputInvalidChanged);
-    this._slottedInput.addEventListener('value-changed',   this.__inputValueChanged);
+    this._app.addEventListener('app-dark-mode-changed', this.__darkModeHandler);
+  }
+
+
+  connectedCallback() {
+
+    super.connectedCallback();
 
     this.addEventListener('click', this.__thisClicked);
   }
 
 
   disconnectedCallback() {
+
     super.disconnectedCallback();
 
-    if (this._slottedInput) {      
-      this._slottedInput.removeEventListener('focused-changed', this.__inputFocusedChanged);
-      this._slottedInput.removeEventListener('invalid-changed', this.__inputInvalidChanged);
-      this._slottedInput.removeEventListener('value-changed',   this.__inputValueChanged);
-    }
+    this.__cleanupSlotListeners();
 
+    this._app.removeEventListener('app-dark-mode-changed', this.__darkModeHandler);
     this.removeEventListener('click', this.__thisClicked);
   }
 
 
-  __computeShowCheckButton(value, invalid) {
-    return value && !invalid;
-  }
+  __computeCheckedClass(noPaperRipple) {
 
-
-  __computeEditIconEntry(disabled) {
-    return disabled ? '' : 'edit-icon-entry';
-  }
-
-
-  __computeCheckedColor(noPaperRipple) {
     return noPaperRipple ? 'is-check' : '';
   }
 
 
   __computeColor(disabled, invalid, focused) {
+
     if (disabled) { return 'disabled'; }
     if (invalid)  { return 'invalid';  }
     if (focused)  { return 'focused';  }
+
     return '';
   }
 
 
+  __computeEditIconEntry(disabled) {
+
+    return disabled ? '' : 'edit-icon-entry';
+  }
+
+
+  __computeHideFadeClass(focused) {
+
+    return focused ? 'hide-fade' : '';
+  }
+
+
+  __computeShowCheckButton(value, invalid) {
+
+    return value && !invalid;
+  }
+
   __computeTabindex(noPaperRipple) {
+
     return noPaperRipple ? 0 : -1;
   }
 
 
   __disabledChanged(disabled) {
+
     if (!disabled)                 { return; }
     if (!this._slottedInput)       { return; }
     if (!this._slottedInput.value) { return; }
@@ -148,32 +182,10 @@ class EditInput extends AppElement {
   }
 
 
-  __inputFocusedChanged(event) {
-    this._focused = event.detail.value;
-  }
-
-
-  __inputInvalidChanged(event) {
-    this._invalid = event.detail.value;
-  }
-
-
-  __inputValueChanged(event) {
-    const {value} = event.detail;
-    this._value   = value;
-
-    this.fire('edit-input-changed', {kind: this.kind, value});
-  }
-
-
-  __btnFocusedChanged(event) {
-    this._raised = event.detail.value;
-  }
-
-
   async __showCheckButtonChanged(showCheck, disabled) {
+
     try {
-      await this.debounce('__showCheckButtonDebouncer', 500);
+      await this.debounce('edit-input-show-check-btn-debouncer', 500);
 
       if (showCheck && !disabled) {
         this.$.editIcon.toCheck();
@@ -191,7 +203,77 @@ class EditInput extends AppElement {
   }
 
 
+  __updateTruncateFade() {
+
+    const hex = getComputedStyle(this, 'background-color');
+
+    this.updateStyles({
+      '--input-truncate-base': hexToRGBA(hex, 1)
+      '--input-truncate-fade': hexToRGBA(hex, 0)
+    });
+  }
+
+
+  __darkModeHandler(event) {
+
+    this._darkMode = event.detail.value;
+  }
+
+
+  __cleanupSlotListeners() {
+
+    if (this._slottedInput) {      
+      this._slottedInput.removeEventListener('focused-changed', this.__inputFocusedChanged);
+      this._slottedInput.removeEventListener('invalid-changed', this.__inputInvalidChanged);
+      this._slottedInput.removeEventListener('value-changed',   this.__inputValueChanged);
+
+      this._slottedInput = undefined;
+    }
+  }
+  
+
+  __slotChangeHandler() {
+
+    this.__cleanupSlotListeners();
+
+    this._slottedInput = this.slotNodes('#inputSlot').find(node => 
+                           node.nodeName !== '#text');
+
+    this._slottedInput.addEventListener('focused-changed', this.__inputFocusedChanged);
+    this._slottedInput.addEventListener('invalid-changed', this.__inputInvalidChanged);
+    this._slottedInput.addEventListener('value-changed',   this.__inputValueChanged);
+  }
+
+
+  __inputFocusedChanged(event) {
+
+    this._focused = event.detail.value;
+  }
+
+
+  __inputInvalidChanged(event) {
+
+    this._invalid = event.detail.value;
+  }
+
+
+  __inputValueChanged(event) {
+
+    const {value} = event.detail;
+    this._value   = value;
+
+    this.fire('edit-input-changed', {kind: this.kind, value});
+  }
+
+
+  __btnFocusedChanged(event) {
+
+    this._raised = event.detail.value;
+  }
+
+
   __findPaperInputNode(domNode) {
+
     const find = node => {
 
       if (node.nodeName === 'EDIT-INPUT') { 
@@ -206,6 +288,7 @@ class EditInput extends AppElement {
 
 
   async __thisClicked(event) {
+
     try {
       if (this.disabled) { return; }
 
@@ -234,6 +317,7 @@ class EditInput extends AppElement {
 
 
   async __editButtonClicked(event) {
+
     try {
 
       await this.__thisClicked(event);
@@ -245,6 +329,7 @@ class EditInput extends AppElement {
 
       if (this._noPaperRipple) {
         await this.$.inputIcon.startSpinner();
+
         this._paperInputNode.blur();
         
         this.fire('edit-input-confirm-edit', {
