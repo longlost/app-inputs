@@ -33,7 +33,7 @@ import '@polymer/paper-ripple/paper-ripple.js';
 
 
 class EditInput extends AppElement {
-  
+
   static get is() { return 'edit-input'; }
 
   static get template() {
@@ -205,7 +205,7 @@ class EditInput extends AppElement {
 
   __updateTruncateFade() {
 
-    const hex = getComputedStyle(this, '--input-truncate-base');
+    const hex = getComputedStyle(this, 'background-color');
 
     this.updateStyles({
       '--input-truncate-fade': hexToRGBA(hex, 0)

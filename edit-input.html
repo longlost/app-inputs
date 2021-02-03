@@ -2,14 +2,14 @@
 <style include="app-shared-styles">
 
   :host {
-    display:     flex;
-    align-items: center;
-    position:    relative;
-    padding:     var(--input-padding, 0px 16px);
-    color:       var(--app-secondary-text);
+    display:          flex;
+    align-items:      center;
+    position:         relative;
+    padding:          var(--input-padding, 0px 16px);
+    background-color: var(--app-background-color, inherit);
+    color:            var(--app-secondary-text);
 
-    /* Do NOT use these as part of the public styling api! */
-    --input-truncate-base: var(--app-background-color);
+    /* Do NOT use this directly as part of the public styling api! */
     --input-truncate-fade: rgba(255, 255, 255, 0);
   }
 
@@ -30,7 +30,7 @@
     --paper-input-container-underline: {
       display: none;
     };
-    
+
     --paper-input-container-underline-focus: { /* broken paper-input fix (3.0.0-pre.1) */
       transition: transform 0.25s var(--app-custom-ease, ease-in-out);
     };
