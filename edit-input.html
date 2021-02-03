@@ -6,7 +6,11 @@
     align-items: center;
     position:    relative;
     padding:     var(--input-padding, 0px 16px);
-    color:       var(--secondary-text-color);
+    color:       var(--app-secondary-text);
+
+    /* Do NOT use these as part of the public styling api! */
+    --input-truncate-base: var(--app-background-color);
+    --input-truncate-fade: rgba(255, 255, 255, 0);
   }
 
   icon-to-spinner {
@@ -18,33 +22,61 @@
     width:        100%;
     min-height:   74px;
     margin-right: 40px;
-    --paper-input-container-color:       var(--secondary-text-color);
-    --paper-input-container-input-color: var(--dark-text-color);
+
+    --paper-input-container-color:       var(--app-secondary-text);
+    --paper-input-container-input-color: var(--app-dark-text);
     --paper-input-container-focus-color: var(--app-primary-color);
+
     --paper-input-container-underline: {
       display: none;
     };
+    
     --paper-input-container-underline-focus: { /* broken paper-input fix (3.0.0-pre.1) */
-      transition: transform 0.25s var(--custom-ease, ease-in-out);
+      transition: transform 0.25s var(--app-custom-ease, ease-in-out);
     };
   }
 
-  #btn-faded-background {
-    position:     absolute;
-    right:        8px;
-    padding-left: 40px;
-    background:   linear-gradient(
+  #inputSlot::slotted([focused]) {
+    outline: none;
+  }
+
+  .btn-faded-background {
+    display:        flex;
+    flex-direction: column;
+    align-items:    center;
+    position:       absolute;
+    right:          8px;
+    height:         40px;
+    width:          40px;
+    overflow:       visible;
+  }
+
+  .btn-faded-background::before {
+    content:        '';
+    position:       absolute;
+    top:            0px;
+    right:          0px;
+    height:         40px;
+    width:          80px;
+    transition:     opacity 0.2s ease-out;
+    pointer-events: none;
+
+    background: linear-gradient(
       to right, 
-      var(--text-truncate-fade), 
-      var(--app-background-color) 40%
+      var(--input-truncate-fade), 
+      var(--input-truncate-base) 40%
     );
+  }
+
+  .hide-fade::before {
+    opacity: 0;
   }
 
   .edit-icon {
     pointer-events:    none;
     transform:         scale(0, 0);
     transition:        transform 0.2s ease-in, opacity 0.2s ease-in;
-    --icon-fill-color: var(--secondary-text-color);
+    --icon-fill-color: var(--app-secondary-text);
   }
 
   .focused {
@@ -64,8 +96,15 @@
     transform:      scale(1, 1);
   }
 
+  .save {
+    font-size:  10px;
+    transition: opacity 0.2s ease-out;
+    opacity:    0;
+  }
+
   .is-check {    
-    color: var(--app-accent-color);
+    color:   var(--app-secondary-color);
+    opacity: 1;
   }
 
 </style>
@@ -74,22 +113,32 @@
 <icon-to-spinner id="inputIcon" 
                  class$="[[__computeColor(disabled, _invalid, _focused)]]" 
                  icon="[[icon]]">
-</icon-to-spinner> 
+</icon-to-spinner>
 
-<slot id="inputSlot"></slot>
 
-<div id="btn-faded-background">
+<slot id="inputSlot"
+      on-slotchange="__slotChangeHandler"></slot>
+
+
+<div class$="btn-faded-background [[__computeHideFadeClass(_focused)]]">
+
   <paper-button class="shared-custom-icon-paper-button"
                 noink="[[!_noPaperRipple]]" 
                 tabindex$="[[_tabindex]]"
                 raised="[[_raised]]"
                 on-click="__editButtonClicked"
                 on-focused-changed="__btnFocusedChanged">
+
     <pencil-to-check-icon id="editIcon" 
-                          class$="edit-icon [[__computeEditIconEntry(disabled)]] [[__computeColor(disabled, _invalid, _focused)]] [[__computeCheckedColor(_noPaperRipple)]]">
+                          class$="edit-icon [[__computeEditIconEntry(disabled)]] [[__computeColor(disabled, _invalid, _focused)]] [[__computeCheckedClass(_noPaperRipple)]]">
     </pencil-to-check-icon>
+
   </paper-button>
+
+  <span class$="save [[__computeCheckedClass(_noPaperRipple)]]">Save</span>
+
 </div>
+
 
 <paper-ripple noink="[[_noPaperRipple]]"></paper-ripple>
     
