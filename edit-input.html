@@ -9,7 +9,11 @@
     background-color: var(--app-background-color, inherit);
     color:            var(--app-secondary-text);
 
-    /* Do NOT use these vars directly as part of the public styling api! */
+    /* 
+      Do NOT use these vars directly as part of the public styling api!
+
+      Set background-color on host directly.
+    */
     --input-truncate-base: rgba(255, 255, 255, 1);
     --input-truncate-fade: rgba(255, 255, 255, 0);
   }
@@ -77,7 +81,9 @@
     pointer-events:    none;
     transform:         scale(0, 0);
     transition:        transform 0.2s ease-in, opacity 0.2s ease-in;
-    --icon-fill-color: var(--app-secondary-text);
+
+    --icon-background-color: var(--input-truncate-base);
+    --icon-fill-color:       var(--app-secondary-text);
   }
 
   .focused {

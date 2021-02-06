@@ -16,8 +16,6 @@ import {
   html
 } from '@longlost/app-core/app-element.js';
 
-import {hexToRGBA} from '@longlost/app-core/lambda.js';
-
 import {
   getComputedStyle, 
   getRootTarget, 
@@ -205,11 +203,18 @@ class EditInput extends AppElement {
 
   __updateTruncateFade() {
 
-    const hex = getComputedStyle(this, 'background-color');
+    const color = getComputedStyle(this, 'background-color');
+
+    const rgbToRgba = (rgb, alpha = 1) => {
+
+      const [front] = rgb.split(')');
+
+      return `${front}, ${alpha})`;
+    };
 
     this.updateStyles({
-      '--input-truncate-base': hexToRGBA(hex, 1)
-      '--input-truncate-fade': hexToRGBA(hex, 0)
+      '--input-truncate-base': rgbToRgba(color, 1),
+      '--input-truncate-fade': rgbToRgba(color, 0)
     });
   }
 

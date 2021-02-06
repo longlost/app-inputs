@@ -1,6 +1,6 @@
 {
   "name": "@longlost/app-inputs",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "A collection of commonly used input elements.",
   "main": "index.js",
   "scripts": {
@@ -39,7 +39,7 @@
     "@polymer/iron-demo-helpers": "^3.1.0",
     "@polymer/test-fixture": "^4.0.2",
     "@webcomponents/webcomponentsjs": "^2.5.0",
-    "chai": "^4.2.0",
+    "chai": "^4.3.0",
     "mocha": "^8.2.1",
     "wct-mocha": "^1.1.0"
   }
