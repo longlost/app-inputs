@@ -4,6 +4,7 @@
   :host {
     display:  block;
     position: relative;
+    
     --list-background-color: var(--app-body-color);
   }
 
@@ -32,6 +33,7 @@
 </paper-input>
 
 
-<suggestion-list id="list" 
+<suggestion-list id="list"
+                 max="[[maxSuggestions]]"
                  suggestions="[[suggestions]]">                       
 </suggestion-list>

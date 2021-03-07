@@ -16,12 +16,14 @@ import {schedule, wait}   from '@longlost/app-core/utils.js';
 import htmlString         from './suggestion-list.html';
 import '@longlost/app-core/app-icons.js';
 import '@longlost/app-core/app-shared-styles.js';
+import '@longlost/grow-shrink-container/grow-shrink-container.js';
 import '@polymer/paper-listbox/paper-listbox.js';
 import '@polymer/paper-item/paper-item.js';
 import '@polymer/paper-icon-button/paper-icon-button.js';
 
 
 class SuggestionList extends AppElement {
+
   static get is() { return 'suggestion-list'; }
 
   static get template() {
@@ -48,15 +50,11 @@ class SuggestionList extends AppElement {
       // items until the close animation has completed.
       _cached: Array,
 
-      _closeBusy: Boolean,
-
       // Directly drives template 'dom-repeat'.
       _items: {
         type: Array,
         computed: '__computeItems(_cached, max)'
-      },
-
-      _openBusy: Boolean
+      }
 
     };
   }
@@ -70,6 +68,7 @@ class SuggestionList extends AppElement {
 
 
   __computeItems(cached, max) {
+
     if (!Array.isArray(cached)) { return; }
 
     if (typeof max !== 'number') {
@@ -92,6 +91,7 @@ class SuggestionList extends AppElement {
 
 
   async __closeBtnClicked() {
+
     try {
       await this.clicked();
       await this.close();
@@ -104,6 +104,7 @@ class SuggestionList extends AppElement {
 
 
   async __itemClicked(event) {
+
     try {
       await this.clicked();
       await this.close();
@@ -137,7 +138,7 @@ class SuggestionList extends AppElement {
         items.length === this.suggestions.length &&
         items.length > 0
       ) {
-        this.__open();
+        this.$.container.open();
       }
     }
     catch (error) {
@@ -147,46 +148,11 @@ class SuggestionList extends AppElement {
   }
 
 
-  async __open() {
-    if (this._openBusy) { return; }
-
-    this._openBusy = true;
-    this.style['display'] = 'block';
-    this.$.xWrapper.classList.remove('delay');
-    this.$.yWrapper.classList.add('delay');
-    this.$.listbox.classList.add('list-delayed-transition');
-
-    await schedule();
-
-    this.$.xWrapper.classList.add('open-list');
-    this.$.yWrapper.classList.add('open-list');
-    this.$.listbox.classList.add('open-list');
-
-    await wait(250);
-
-    this._openBusy = false;
-  }
-
-
   async close() {
-    if (this._closeBusy) { return; }
 
-    this._closeBusy = true;    
-    this.$.listbox.classList.remove('list-delayed-transition');
-    this.$.listbox.classList.remove('open-list');
-    this.$.xWrapper.classList.add('delay');
-    this.$.yWrapper.classList.remove('delay');
-
-    await wait(200);
-
-    this.$.yWrapper.classList.remove('open-list');
-    this.$.xWrapper.classList.remove('open-list');
-
-    await wait(250);
-
-    this.style['display'] = 'none';
-    this._cached    = undefined;
-    this._closeBusy = false;
+    await this.$.container.close();
+    
+    this._cached = undefined;
   }
 
 }

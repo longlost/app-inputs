@@ -2,57 +2,20 @@
 <style include="app-shared-styles">
 
   :host {
-    display:          none;
-    position:         absolute;
-    top:              100%;
-    right:            0px;
-    left:             0px;
-    background-color: transparent;
-    z-index:          10;
     --suggestion-list-background-color:   var(--app-background-color);
-    --suggestion-list-color:              var(--dark-text-color);
+    --suggestion-list-color:              var(--app-dark-text);
     --suggestion-list-close-button-color: var(--app-primary-color);
   }
 
-  .list-animators {
-    transform-origin: center top;
+  #container {
+    right: 0px;
+
+    --background-color: var(--suggestion-list-background-color);
   }
 
-  .x-wrapper {
-    transition:       transform 0.2s var(--custom-ease, ease-out);
-    transform:        translateY(0px) scale(0, 0.1); 
-    background-color: transparent;    
-  }
-
-  .y-wrapper {
-    display:          flex;
-    flex-direction:   column; 
-    transition:       transform 0.3s var(--custom-ease, ease-out);
-    transform:        translateY(0px) scale(1, 0.1);
-    background-color: var(--suggestion-list-background-color);
-  }
-
-  .delay {
-    transition-delay: 0.05s;
-  }
-
-  .list {
-    width:      100%;
-    padding:    0px;
-    transition: transform 0.2s var(--custom-ease, ease-out), opacity 0.1s ease-in;
-    transform:  translateY(8px) scale(1, 1);
-    opacity:    0;
-    color:      var(--suggestion-list-color);
-    --paper-listbox-background-color: var(--suggestion-list-background-color);
-  }
-
-  .list-delayed-transition {    
-    transition: transform 0.3s var(--custom-ease, ease-out) 0.2s, opacity 0.1s ease-in 0.3s;
-  }
-
-  .open-list {
-    transform: translateY(0px) scale(1, 1);
-    opacity:   1;
+  #wrapper {
+    display:        flex;
+    flex-direction: column; 
   }
 
   paper-icon-button {
@@ -60,20 +23,29 @@
     color:      var(--suggestion-list-close-button-color);
   }
 
+  paper-listbox {
+    width:   100%;
+    padding: 0px;
+
+    color:                            var(--suggestion-list-color);
+    --paper-listbox-color:            var(--suggestion-list-color);
+    --paper-listbox-background-color: var(--suggestion-list-background-color);
+  }
+
 </style>
 
 
-<div id="xWrapper" 
-     class="list-animators x-wrapper">
-  <div id="yWrapper" 
-       class="list-animators y-wrapper shared-card">
+<grow-shrink-container id="container">
+
+  <div id="wrapper">
+
 
     <paper-icon-button icon="app-icons:close" 
                        on-click="__closeBtnClicked">
     </paper-icon-button>
 
-    <paper-listbox id="listbox" 
-                   class="list" 
+
+    <paper-listbox id="listbox"
                    role="listbox">
 
       <template is="dom-repeat" 
@@ -89,5 +61,8 @@
       </template>
 
     </paper-listbox>
+
+
   </div>
-</div>
+
+</grow-shrink-container>
