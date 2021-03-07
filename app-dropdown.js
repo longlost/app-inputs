@@ -2,8 +2,8 @@
 /**
   * `app-dropdown`
   * 
-  *   Custom styled paper-textarea element that allows an iron image prefix icon
-  *   just like paper-input's.
+  *   Custom styled paper-textarea element that allows an iron-icon prefix icon
+  *   just like paper-input.
   *
   *
   *
@@ -21,6 +21,25 @@
   *
   **/
 
+  
+
+
+// WARNING!
+//
+//  The current form of this element will fail with errors pertaining
+//  to animation errors with the underlaying `paper-dropdown-menu`.
+//
+//  `paper-dropdown-menu` and `paper-menu-button` require outdated
+//  Web Animation polyfills to perform a simple grow/shrink animation.
+
+
+// TODO: 
+//
+//      Replace `paper-dropdown-menu` with `grow-shrink-container`
+
+
+
+
 
 import {html}       from '@longlost/app-core/app-element.js';
 import {InputMixin} from './input-mixin.js';
@@ -32,6 +51,7 @@ import './icon-prefix-input.js';
 
 
 class AppDropdown extends InputMixin() {
+
   static get is() { return 'app-dropdown'; }
 
   static get template() {
