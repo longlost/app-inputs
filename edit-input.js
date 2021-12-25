@@ -53,10 +53,7 @@ class EditInput extends AppElement {
         value: false
       },
 
-      _darkMode: {
-        type: Boolean,
-        value: false
-      },
+      _darkMode: Boolean,
 
       _focused: Boolean,
 
@@ -104,11 +101,6 @@ class EditInput extends AppElement {
     this.__inputInvalidChanged = this.__inputInvalidChanged.bind(this);
     this.__inputValueChanged   = this.__inputValueChanged.bind(this);
     this.__thisClicked         = this.__thisClicked.bind(this);
-
-    this._app      = document.querySelector('#app');
-    this._darkMode = this._app.darkMode;
-
-    this._app.addEventListener('app-dark-mode-changed', this.__darkModeHandler);
   }
 
 
@@ -117,6 +109,11 @@ class EditInput extends AppElement {
     super.connectedCallback();
 
     this.addEventListener('click', this.__thisClicked);
+
+    this._app      = document.querySelector('#app');
+    this._darkMode = this._app.darkMode;
+
+    this._app.addEventListener('app-dark-mode-changed', this.__darkModeHandler);
   }
 
 
@@ -199,7 +196,6 @@ class EditInput extends AppElement {
       console.error(error);
     }
   }
-
 
   __updateTruncateFade() {
 
