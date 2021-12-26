@@ -59,6 +59,8 @@ class EditInput extends AppElement {
 
       _invalid: Boolean,
 
+      _minlength: Number,
+
       _noPaperRipple: Boolean,
 
       _paperInputNode: Object,
@@ -68,7 +70,7 @@ class EditInput extends AppElement {
       // Controls edit icon state.
       _showCheckButton: {
         type: Boolean,
-        computed: '__computeShowCheckButton(_value, _invalid)'
+        computed: '__computeShowCheckButton(_value, _invalid, _minlength)'
       },
 
       _tabindex: {
@@ -156,9 +158,15 @@ class EditInput extends AppElement {
   }
 
 
-  __computeShowCheckButton(value, invalid) {
+  __computeShowCheckButton(value, invalid, minlength) {
 
-    return value && !invalid;
+    // Unrequired inputs can be empty strings.
+    if (minlength === 0) {
+      return typeof value === 'string' && !invalid;
+    }
+
+    // Required inputs cannot be an empty string.
+    return value && !invalid;    
   }
 
   __computeTabindex(noPaperRipple) {
@@ -239,6 +247,8 @@ class EditInput extends AppElement {
 
     this._slottedInput = this.slotNodes('#inputSlot').find(node => 
                            node.nodeName !== '#text');
+
+    this._minlength = this._slottedInput.minlength;
 
     this._slottedInput.addEventListener('focused-changed', this.__inputFocusedChanged);
     this._slottedInput.addEventListener('invalid-changed', this.__inputInvalidChanged);
@@ -337,7 +347,10 @@ class EditInput extends AppElement {
           kind:        this.kind, 
           value:       this._value, 
           stopSpinner: this.$.inputIcon.stopSpinner.bind(this.$.inputIcon),
-          reset:       () => this._slottedInput.value = undefined 
+          reset:       () => {
+            this._slottedInput.value = null;
+            this._value              = null; // `gold-phone-input` bug fix.
+          }
         });
       }
     }
