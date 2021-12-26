@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/longlost/app-inputs#readme",
   "dependencies": {
-    "@longlost/app-core": "^6.0.6",
+    "@longlost/app-core": "^6.0.7",
     "@longlost/grow-shrink-container": "^1.0.0",
     "@longlost/icon-to-spinner": "^2.0.0",
     "@longlost/pencil-to-check-icon": "^1.0.3",
