@@ -273,7 +273,12 @@ class EditInput extends AppElement {
     const {value} = event.detail;
     this._value   = value;
 
-    this.fire('edit-input-changed', {kind: this.kind, value});
+    this.fire('edit-input-changed', {
+      icon:  this.icon,
+      kind:  this.kind,
+      label: this._slottedInput.label,
+      value
+    });
   }
 
 
@@ -344,7 +349,9 @@ class EditInput extends AppElement {
         this._paperInputNode.blur();
         
         this.fire('edit-input-confirm-edit', {
-          kind:        this.kind, 
+          icon:        this.icon,
+          kind:        this.kind,
+          label:       this._slottedInput.label,
           value:       this._value, 
           stopSpinner: this.$.inputIcon.stopSpinner.bind(this.$.inputIcon),
           reset:       () => {
