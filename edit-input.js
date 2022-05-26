@@ -23,7 +23,7 @@ import {
 } from '@longlost/app-core/utils.js';
 
 import htmlString from './edit-input.html';
-import '@longlost/app-core/app-shared-styles.js';
+import '@longlost/app-core/app-shared-styles.css';
 import '@longlost/icon-to-spinner/icon-to-spinner.js';
 import '@longlost/pencil-to-check-icon/pencil-to-check-icon.js';
 import '@polymer/paper-button/paper-button.js';

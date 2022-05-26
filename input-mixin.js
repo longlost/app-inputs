@@ -53,7 +53,7 @@
 
 import {AppElement}   from '@longlost/app-core/app-element.js';
 import {consumeEvent} from '@longlost/app-core/utils.js';
-import '@longlost/app-core/app-shared-styles.js';
+import '@longlost/app-core/app-shared-styles.css';
 
 
 export const InputMixin = () => {
