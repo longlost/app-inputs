@@ -17,7 +17,7 @@ import {consumeEvent, schedule} from '@longlost/app-core/utils.js';
 import {InputMixin}             from './input-mixin.js';
 import htmlString               from './search-input.html';
 import '@longlost/app-core/app-icons.js';
-import '@longlost/app-core/app-shared-styles.js';
+import '@longlost/app-core/app-shared-styles.css';
 import '@polymer/paper-icon-button/paper-icon-button.js';
 import '@polymer/iron-a11y-keys/iron-a11y-keys.js';
 import './input-icons.js';
