@@ -11,10 +11,7 @@
   *
   **/
 
-import {
-  AppElement, 
-  html
-} from '@longlost/app-core/app-element.js';
+import {AppElement} from '@longlost/app-core/app-element.js';
 
 import {
   getComputedStyle, 
@@ -22,7 +19,7 @@ import {
   warn
 } from '@longlost/app-core/utils.js';
 
-import htmlString from './edit-input.html';
+import template from './edit-input.html';
 import '@longlost/app-core/app-shared-styles.css';
 import '@longlost/icon-to-spinner/icon-to-spinner.js';
 import '@longlost/pencil-to-check-icon/pencil-to-check-icon.js';
@@ -35,7 +32,7 @@ class EditInput extends AppElement {
   static get is() { return 'edit-input'; }
 
   static get template() {
-    return html([htmlString]);
+    return template;
   }
 
 

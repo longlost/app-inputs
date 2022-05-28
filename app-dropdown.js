@@ -40,10 +40,8 @@
 
 
 
-
-import {html}       from '@longlost/app-core/app-element.js';
 import {InputMixin} from './input-mixin.js';
-import htmlString   from './app-dropdown.html';
+import template     from './app-dropdown.html';
 import '@longlost/app-core/app-icons.js';
 import '@polymer/paper-dropdown-menu/paper-dropdown-menu.js';
 import '@polymer/paper-listbox/paper-listbox.js';
@@ -55,7 +53,7 @@ class AppDropdown extends InputMixin() {
   static get is() { return 'app-dropdown'; }
 
   static get template() {
-    return html([htmlString]);
+    return template;
   }
 
 

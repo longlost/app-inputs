@@ -15,20 +15,21 @@
   *
   **/
 
-import {AppElement, html} from '@longlost/app-core/app-element.js';
-import {clamp}            from '@longlost/app-core/lambda.js';
-import {consumeEvent}     from '@longlost/app-core/utils.js';
-import htmlString         from './qty-input.html';
+import {AppElement}   from '@longlost/app-core/app-element.js';
+import {clamp}        from '@longlost/app-core/lambda.js';
+import {consumeEvent} from '@longlost/app-core/utils.js';
+import template       from './qty-input.html';
 import '@longlost/app-core/app-icons.js';
 import '@polymer/paper-input/paper-input.js';
 import '@polymer/paper-icon-button/paper-icon-button.js';
 
 
 class QtyInput extends AppElement {
+
   static get is() { return 'qty-input'; }
 
   static get template() {
-    return html([htmlString]);
+    return template;
   }
 
 
@@ -89,6 +90,7 @@ class QtyInput extends AppElement {
  
   // Based on placement prop.
   __computeWrapperClass(placement) {
+
     if (placement === 'top')    { return 'buttons-top-and-bottom'; }
     if (placement === 'center') { return 'buttons-left-and-right'; }
     if (placement === 'right')  { return 'buttons-right'; }
@@ -106,6 +108,7 @@ class QtyInput extends AppElement {
 
 
   __computeMaxLength(max) {
+
     if (!max) { return; }
 
     return max.toString().length;    
@@ -113,16 +116,19 @@ class QtyInput extends AppElement {
 
 
   __computeDisableButtons(max, min) {
+
     return max < min;
   }
 
 
   __quantityChanged(value) {
+
     this.fire('value-changed', {value});
   }
  
 
   __qtyInputChanged(event) {
+
     consumeEvent(event);
 
     const {value} = event.detail;
@@ -134,6 +140,7 @@ class QtyInput extends AppElement {
 
 
   __focusedChanged(event) {
+
     const {value} = event.detail;
 
     this.focused = value;
@@ -153,8 +160,10 @@ class QtyInput extends AppElement {
 
   
   async __incrementQtyButtonClicked() {
+
     try {
       await this.click();
+
       const temp = this.qty + this.increment;
 
       if (temp >= this.max) { 
@@ -172,8 +181,10 @@ class QtyInput extends AppElement {
 
   
   async __decrementQtyButtonClicked() {
+
     try {
       await this.click();
+      
       const temp = this.qty - this.increment;
 
       if (temp <= this.min) { 

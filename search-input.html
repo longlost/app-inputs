@@ -8,12 +8,13 @@
     position:        relative;
     height:          64px;
     padding:         0px 16px;
+    
     --list-background-color:   var(--app-body-color);
     --search-button-color:     var(--app-primary-color);
     --clear-button-color:      var(--app-primary-color);
     --input-background-color:  var(--app-background-color);
     --input-border-radius:     8px;
-    --input-placeholder-color: var(--disabled-text-color);
+    --input-placeholder-color: var(--app-disabled-text);
     --input-width:             100%;
     --input-text-overflow:     ellipsis;
   }
@@ -59,7 +60,7 @@
   }
 
   #search-btn[disabled] {
-    color: var(--disabled-text-color);
+    color: var(--app-disabled-text);
   }
 
   #clear-btn {
