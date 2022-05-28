@@ -26,10 +26,10 @@ import '@polymer/paper-input/paper-input-container.js';
 import '@polymer/paper-input/paper-input-error.js';
 
 import {IronFormElementBehavior} from '@polymer/iron-form-element-behavior/iron-form-element-behavior.js';
-import {DomModule} from '@polymer/polymer/lib/elements/dom-module.js';
-import {Polymer} from '@polymer/polymer/lib/legacy/polymer-fn.js';
-import {html} from '@polymer/polymer/lib/utils/html-tag.js';
-import {PaperInputBehavior} from '@polymer/paper-input/paper-input-behavior.js';
+import {DomModule}               from '@polymer/polymer/lib/elements/dom-module.js';
+import {Polymer}                 from '@polymer/polymer/lib/legacy/polymer-fn.js';
+import {html}                    from '@polymer/polymer/lib/utils/html-tag.js';
+import {PaperInputBehavior}      from '@polymer/paper-input/paper-input-behavior.js';
 
 /**
 Material design: [Text
@@ -87,7 +87,9 @@ Custom property | Description | Default
 @demo demo/index.html
 */
 Polymer({
+
   is: 'custom-search-paper-input',
+
   /** @override */
   _template: html`
     <style>
@@ -148,15 +150,15 @@ Polymer({
       }
 
       input::-webkit-input-placeholder {
-        color: var(--paper-input-container-color, var(--secondary-text-color));
+        color: var(--paper-input-container-color, var(--app-secondary-text));
       }
 
       input:-moz-placeholder {
-        color: var(--paper-input-container-color, var(--secondary-text-color));
+        color: var(--paper-input-container-color, var(--app-secondary-text));
       }
 
       input::-moz-placeholder {
-        color: var(--paper-input-container-color, var(--secondary-text-color));
+        color: var(--paper-input-container-color, var(--app-secondary-text));
       }
 
       input::-ms-clear {
@@ -168,7 +170,7 @@ Polymer({
       }
 
       input:-ms-input-placeholder {
-        color: var(--paper-input-container-color, var(--secondary-text-color));
+        color: var(--paper-input-container-color, var(--app-secondary-text));
       }
 
       input[type="search"]::-webkit-search-decoration,
@@ -237,7 +239,7 @@ Polymer({
     inputAriaHaspopup: {
       type: String,
       value: undefined,
-    },
+    }
   },
 
   /**
@@ -270,5 +272,6 @@ Polymer({
     if (!!this.inputElement.bindValue) {
       this.$.container._handleValueAndAutoValidate(this.inputElement);
     }
-  },
+  }
+  
 });

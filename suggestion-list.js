@@ -11,9 +11,9 @@
   **/
 
 
-import {AppElement, html} from '@longlost/app-core/app-element.js';
-import {schedule, wait}   from '@longlost/app-core/utils.js';
-import htmlString         from './suggestion-list.html';
+import {AppElement}     from '@longlost/app-core/app-element.js';
+import {schedule, wait} from '@longlost/app-core/utils.js';
+import template         from './suggestion-list.html';
 import '@longlost/app-core/app-icons.js';
 import '@longlost/app-core/app-shared-styles.css';
 import '@longlost/grow-shrink-container/grow-shrink-container.js';
@@ -27,7 +27,7 @@ class SuggestionList extends AppElement {
   static get is() { return 'suggestion-list'; }
 
   static get template() {
-    return html([htmlString]);
+    return template;
   }
 
 
@@ -124,6 +124,7 @@ class SuggestionList extends AppElement {
 
 
   async __domChanged() {
+    
     try {
       await this.debounce('suggestion-list-dom-debounce', 100);
 

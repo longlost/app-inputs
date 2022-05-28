@@ -25,16 +25,17 @@
   **/
 
 
-import {AppElement, html} from '@longlost/app-core/app-element.js';
-import htmlString         from './icon-prefix-input.html';
+import {AppElement} from '@longlost/app-core/app-element.js';
+import template     from './icon-prefix-input.html';
 import '@polymer/iron-icon/iron-icon.js';
 
 
 class IconPrefixInput extends AppElement {
+  
   static get is() { return 'icon-prefix-input'; }
 
   static get template() {
-    return html([htmlString]);
+    return template;
   }
 
 

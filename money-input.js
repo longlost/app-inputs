@@ -14,29 +14,26 @@
   *
   **/
 
-import {AppElement, html} from '@longlost/app-core/app-element.js';
-import {consumeEvent}     from '@longlost/app-core/utils.js';
-import htmlString         from './money-input.html';
+import {AppElement}   from '@longlost/app-core/app-element.js';
+import {consumeEvent} from '@longlost/app-core/utils.js';
+import template       from './money-input.html';
 import '@longlost/app-core/app-shared-styles.js';
 import '@polymer/paper-input/paper-input.js';
 
 
 // Removes commas and decimal.
-const removeUI = str => {
-  return ('' + str).replace(/[^\d]*/g, '');
-};
+const removeUI = str => ('' + str).replace(/[^\d]*/g, '');
 
 
-const getDecimal = str => {
-  return str.match(new RegExp('(\\d{0,' + 2 + '})$'))[0];
-};
+const getDecimal = str => str.match(new RegExp('(\\d{0,' + 2 + '})$'))[0];
 
 
 class MoneyInput extends AppElement {
+
   static get is() { return 'money-input'; }
 
   static get template() {
-    return html([htmlString]);
+    return template;
   }
 
 
@@ -98,13 +95,15 @@ class MoneyInput extends AppElement {
 
   // Add commas.
   __markAmount(string) {
+
     return string.replace(/(0*)(?=[^0]*)/, '').split(/(?=(?:...)*$)/).join(this.unitSymbol);
   }
 
 
   __parse(string) {
-    const dec = getDecimal(string);
-    const reg = new RegExp(dec + '$');
+
+    const dec           = getDecimal(string);
+    const reg           = new RegExp(dec + '$');
     const beforeDecimal = string.replace(reg, '');
 
     if (beforeDecimal.length <= 1) {
@@ -116,13 +115,15 @@ class MoneyInput extends AppElement {
 
 
   __computeFormattedValue(value) {
+
     if (value === '000' || value === '') { return; }
 
-    const newValue = removeUI(value);
+    const newValue    = removeUI(value);
     const hasTwoZeros = newValue.substring(0, 2);
 
     if (newValue.length < 3 || hasTwoZeros === '00') {
-      const dec = getDecimal(newValue);
+
+      const dec        = getDecimal(newValue);
       const decNoZeros = dec.replace(/(0*)(?=[^0]*)/, '');
 
       // Check if needs to add 0 in the end, beginning or both.
@@ -136,16 +137,19 @@ class MoneyInput extends AppElement {
 
 
   __formattedValueChanged(value) {
+
     this.fire('value-changed', {value});
   }
 
 
   __focusedChanged(event) {
+
     this.focused = event.detail.value;
   }
 
 
   __inputValueChanged(event) {
+    
     consumeEvent(event);
 
     const {value} = event.detail;

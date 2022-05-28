@@ -12,10 +12,10 @@
   *
   **/
 
-import {html}                   from '@longlost/app-core/app-element.js';
+
 import {consumeEvent, schedule} from '@longlost/app-core/utils.js';
 import {InputMixin}             from './input-mixin.js';
-import htmlString               from './search-input.html';
+import template                 from './search-input.html';
 import '@longlost/app-core/app-icons.js';
 import '@longlost/app-core/app-shared-styles.css';
 import '@polymer/paper-icon-button/paper-icon-button.js';
@@ -26,10 +26,11 @@ import './suggestion-list.js';
 
 
 class SearchInput extends InputMixin() {
+
   static get is() { return 'search-input'; }
 
   static get template() {
-    return html([htmlString]);
+    return template;
   }
 
 
@@ -76,6 +77,7 @@ class SearchInput extends InputMixin() {
 
 
   connectedCallback() {
+
     super.connectedCallback();
 
     this._a11yTarget = this.$.input;
@@ -83,17 +85,21 @@ class SearchInput extends InputMixin() {
 
 
   __computeClearBtnDisabled(value) {
+
     return !Boolean(value);
   }
 
 
   __computeSearchBtnDisabled(value, minlength) {
+
     if (value && value.length >= minlength) { return false; }
+
     return true;
   }
 
 
   __valueObserver(newVal, oldVal) {
+
     if (newVal === oldVal) { return; }
 
     this.fire('value-changed', {value: newVal});
@@ -101,6 +107,7 @@ class SearchInput extends InputMixin() {
 
 
   async __search() {
+
     try {
 
       await this.clicked();
@@ -120,6 +127,7 @@ class SearchInput extends InputMixin() {
 
 
   __a11yOnEnter() {
+
     if (this._searchBtnDisabled) { return; } 
      
     this.__search();
@@ -127,11 +135,13 @@ class SearchInput extends InputMixin() {
 
 
   __searchBtnClicked() {
+
     this.__search();
   }
 
 
   async __clearBtnClicked() {
+
     try {
       await this.clicked();
 
@@ -152,6 +162,7 @@ class SearchInput extends InputMixin() {
 
   // Overwrite mixin method.
   __valueChanged(event) {
+
     consumeEvent(event);
 
     const {value} = event.detail;
@@ -160,6 +171,7 @@ class SearchInput extends InputMixin() {
 
 
   closeSuggestions() {
+    
     return this.$.list.close();
   }
 

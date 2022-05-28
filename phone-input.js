@@ -25,19 +25,19 @@
   **/
 
 
-import {html}       from '@longlost/app-core/app-element.js';
 import {InputMixin} from './input-mixin.js';
-import htmlString   from './phone-input.html';
+import template     from './phone-input.html';
 import '@longlost/app-core/app-icons.js';
 import '@polymer/gold-phone-input/gold-phone-input.js';
 import './icon-prefix-input.js';
 
 
 class PhoneInput extends InputMixin() {
+  
   static get is() { return 'phone-input'; }
 
   static get template() {
-    return html([htmlString]);
+    return template;
   }
 
 

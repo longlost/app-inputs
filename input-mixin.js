@@ -97,11 +97,13 @@ export const InputMixin = () => {
 
 
     __focusedChanged(event) {
+
       this.focused = event.detail.value;
     }
 
 
     __valueChanged(event) {
+      
       consumeEvent(event);
 
       this.fire('value-changed', event.detail);

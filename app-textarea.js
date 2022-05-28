@@ -22,19 +22,19 @@
   **/
 
 
-import {html}       from '@longlost/app-core/app-element.js';
 import {InputMixin} from './input-mixin.js';
-import htmlString   from './app-textarea.html';
+import template     from './app-textarea.html';
 import '@polymer/paper-input/paper-textarea.js';
 import './icon-prefix-input.js';
 import './input-icons.js';
 
 
 class AppTextarea extends InputMixin() {
+
   static get is() { return 'app-textarea'; }
 
   static get template() {
-    return html([htmlString]);
+    return template;
   }
 
 
